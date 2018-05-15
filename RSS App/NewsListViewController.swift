@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  NewsListViewController.swift
 //  RSS App
 //
 //  Created by Eric Castillo on 5/14/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class NewsListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
