@@ -10,40 +10,52 @@ import UIKit
 import WebKit
 import SafariServices
 
-class ArticleViewController: UIViewController, UITextViewDelegate {
+class ArticleViewController: UIViewController, UITextViewDelegate, WKUIDelegate, WKNavigationDelegate {
 
     @IBOutlet weak var scrollContent: UIView!
     @IBOutlet weak var bodyContent: UITextView!
+    @IBOutlet weak var webView: WKWebView!
+    @IBOutlet weak var bodyContent2: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         bodyContent.delegate = self
+        webView.navigationDelegate = self
 
-        let attributedString = "At its <a href=\"https://www.macrumors.com/2018/05/08/google-assistant-improvements-google-io/\">Google I/O developer conference</a> last week, Google debuted a <a href=\"https://www.blog.google/products/news/new-google-news-ai-meets-human-intelligence/\">revamped Google News app</a> focusing on balanced news delivery with personalized news suggestions, and as of today, the new Google News app is available for download on the iPhone and iPad.<br/><br/>According to Google, the News app is designed to use \"the best of artificial intelligence to find \"the best of human intelligence\" by taking advantage of new AI techniques to organize a constant flow of new information into digestible storylines.<br/><br/><img src=\"http://cdn.macrumors.com/article-new/2018/05/googlenewsapp-800x564.jpg\" alt=\"\" width=\"800\" height=\"564\" class=\"aligncenter size-large wp-image-636602\" /><br/><center><iframe src=\"https://www.youtube.com/embed/wArETCVkS4g\" width=\"560\" height=\"315\" frameborder=\"0\" allowfullscreen=\"allowfullscreen\"></iframe></center><br/>Google News for iOS replaces the existing Google Play Newsstand app, which has been overhauled with a new name and a new design with the launch of Google News. Full release notes for the update are below:<blockquote>Google Play Newsstand is now Google News!<br/>What's new:<br/>- Enjoy an entirely new, cleaner look, designed for a better reading experience<br/>- Get up to speed with a smarter briefing that shows you the top five stories for you right now<br/>- Explore all the coverage of a story in one place. See a timeline of events, FAQs, people and places involved, perspectives, analysis and more for every news story<br/>- Subscribe to credible sources with a single click</blockquote>Google News can be downloaded from the App Store for free. [<a href=\"https://itunes.apple.com/us/app/google-news/id459182288?mt=8\">Direct Link</a>]<br/><br/><div class=\"linkback\">Tag: <a href=\"https://www.macrumors.com/roundup/google/\">Google</a></div><br/><a href=\"https://forums.macrumors.com/threads/google-revamped-news-app-ios-devices.2118935/\">Discuss this article</a> in our forums<br/><br/><div class=\"feedflare\"><a href=\"http://feeds.macrumors.com/~ff/MacRumors-All?a=1OaudMR-xbU:aMwyx0CBM8A:6W8y8wAjSf4\"><img src=\"http://feeds.feedburner.com/~ff/MacRumors-All?d=6W8y8wAjSf4\" border=\"0\"></img></a> <a href=\"http://feeds.macrumors.com/~ff/MacRumors-All?a=1OaudMR-xbU:aMwyx0CBM8A:qj6IDK7rITs\"><img src=\"http://feeds.feedburner.com/~ff/MacRumors-All?d=qj6IDK7rITs\" border=\"0\"></img></a></div><img src=\"http://feeds.feedburner.com/~r/MacRumors-All/~4/1OaudMR-xbU\" height=\"1\" width=\"1\" alt=\"\"/>\"".convertHtml()
+        let attributedString1 = "At its <a href=\"https://www.macrumors.com/2018/05/08/google-assistant-improvements-google-io/\">Google I/O developer conference</a> last week, Google debuted a <a href=\"https://www.blog.google/products/news/new-google-news-ai-meets-human-intelligence/\">revamped Google News app</a> focusing on balanced news delivery with personalized news suggestions, and as of today, the new Google News app is available for download on the iPhone and iPad.<br/><br/>According to Google, the News app is designed to use \"the best of artificial intelligence to find \"the best of human intelligence\" by taking advantage of new AI techniques to organize a constant flow of new information into digestible storylines.<br/><br/><img src=\"http://cdn.macrumors.com/article-new/2018/05/googlenewsapp-800x564.jpg\" alt=\"\" width=\"800\" height=\"564\" class=\"aligncenter size-large wp-image-636602\" /><br/><center>".convertHtml()
+        let webString = "<iframe src=\"https://www.youtube.com/embed/wArETCVkS4g\" width=\"560\" height=\"315\" frameborder=\"0\" allowfullscreen=\"allowfullscreen\"></iframe>"
+        let attributedString2 = "</center><br/>Google News for iOS replaces the existing Google Play Newsstand app, which has been overhauled with a new name and a new design with the launch of Google News. Full release notes for the update are below:<blockquote>Google Play Newsstand is now Google News!<br/>What's new:<br/>- Enjoy an entirely new, cleaner look, designed for a better reading experience<br/>- Get up to speed with a smarter briefing that shows you the top five stories for you right now<br/>- Explore all the coverage of a story in one place. See a timeline of events, FAQs, people and places involved, perspectives, analysis and more for every news story<br/>- Subscribe to credible sources with a single click</blockquote>Google News can be downloaded from the App Store for free. [<a href=\"https://itunes.apple.com/us/app/google-news/id459182288?mt=8\">Direct Link</a>]<br/><br/><div class=\"linkback\">Tag: <a href=\"https://www.macrumors.com/roundup/google/\">Google</a></div><br/><a href=\"https://forums.macrumors.com/threads/google-revamped-news-app-ios-devices.2118935/\">Discuss this article</a> in our forums<br/><br/><div class=\"feedflare\"><a href=\"http://feeds.macrumors.com/~ff/MacRumors-All?a=1OaudMR-xbU:aMwyx0CBM8A:6W8y8wAjSf4\"><img src=\"http://feeds.feedburner.com/~ff/MacRumors-All?d=6W8y8wAjSf4\" border=\"0\"></img></a> <a href=\"http://feeds.macrumors.com/~ff/MacRumors-All?a=1OaudMR-xbU:aMwyx0CBM8A:qj6IDK7rITs\"><img src=\"http://feeds.feedburner.com/~ff/MacRumors-All?d=qj6IDK7rITs\" border=\"0\"></img></a></div><img src=\"http://feeds.feedburner.com/~r/MacRumors-All/~4/1OaudMR-xbU\" height=\"1\" width=\"1\" alt=\"\"/>\"".convertHtml()
         
-        attributedString.addAttributes([NSAttributedStringKey.font : UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.medium)], range: NSRange(location: 0, length: attributedString.length))
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 5
         
-        
-        
-        attributedString.enumerateAttribute(NSAttributedStringKey.attachment, in: NSMakeRange(0, attributedString.length), options: .init(rawValue: 0), using: { (value, range, stop) in
-            if let attachement = value as? NSTextAttachment {
-                let image = attachement.image(forBounds: attachement.bounds, textContainer: NSTextContainer(), characterIndex: range.location)!
-                let contentSize: CGRect = self.bodyContent.bounds
-                print("image width: \(image.size.width)")
-                print("content width: \(contentSize.width)")
-                if image.size.width > contentSize.width {
-                    let newImage = image.resizeImage(scale: contentSize.width/image.size.width)
-                    let newAttribut = NSTextAttachment()
-                    newAttribut.image = newImage
-                    attributedString.addAttribute(NSAttributedStringKey.attachment, value: newAttribut, range: range)
-                }
-            }
-        })
+        let att = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.medium),
+                   NSAttributedStringKey.paragraphStyle: paragraphStyle]
+        attributedString1.addAttributes(att, range: NSRange(location: 0, length: attributedString1.length))
         
         
         
-        bodyContent.attributedText = attributedString
+//        attributedString.enumerateAttribute(NSAttributedStringKey.attachment, in: NSMakeRange(0, attributedString.length), options: .init(rawValue: 0), using: { (value, range, stop) in
+//            if let attachement = value as? NSTextAttachment {
+//                let image = attachement.image(forBounds: attachement.bounds, textContainer: NSTextContainer(), characterIndex: range.location)!
+//                let contentSize: CGRect = self.bodyContent.bounds
+//                print("image width: \(image.size.width)")
+//                print("content width: \(contentSize.width)")
+//                if image.size.width > contentSize.width {
+//                    let newImage = image.resizeImage(scale: contentSize.width/image.size.width)
+//                    let newAttribut = NSTextAttachment()
+//                    newAttribut.image = newImage
+//                    attributedString.addAttribute(NSAttributedStringKey.attachment, value: newAttribut, range: range)
+//                }
+//            }
+//        })
+        
+        
+        
+        bodyContent.attributedText = attributedString1
+        webView.loadHTMLString(webString, baseURL: nil)
+        bodyContent2.attributedText = attributedString2
     
         
 
@@ -60,6 +72,20 @@ class ArticleViewController: UIViewController, UITextViewDelegate {
         let svc = SFSafariViewController(url: URL)
         self.present(svc, animated: true, completion: nil)
         return false
+    }
+    
+//    func webViewDidFinishLoad(_ webView: UIWebView) {
+//        print("webview finished loading");
+//        var newBounds = webView.bounds
+//        newBounds.size.height = webView.scrollView.contentSize.height
+//        webView.bounds = newBounds
+//    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        print("webview finished loading");
+        var newBounds = webView.bounds
+        newBounds.size.height = 400 //webView.scrollView.contentSize.height
+        webView.bounds = newBounds
     }
     
     

@@ -1,0 +1,16 @@
+PODS:
+  - ContentFittingWebView (1.0.1)
+
+DEPENDENCIES:
+  - ContentFittingWebView (~> 1.0.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - ContentFittingWebView
+
+SPEC CHECKSUMS:
+  ContentFittingWebView: 57ef573f1604427fa55ed7404400f13ad9232956
+
+PODFILE CHECKSUM: dd4a20b1e34055411d03ccd7b3b9d50f002a7464
+
+COCOAPODS: 1.5.2

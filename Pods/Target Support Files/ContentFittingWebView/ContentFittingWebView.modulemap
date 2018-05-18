@@ -1,0 +1,6 @@
+framework module ContentFittingWebView {
+  umbrella header "ContentFittingWebView-umbrella.h"
+
+  export *
+  module * { export * }
+}
