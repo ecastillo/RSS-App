@@ -44,11 +44,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tQI-X3-kyE">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tQI-X3-kyE">
                                 <rect key="frame" x="0.0" y="51" width="375" height="616"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dgk-sr-a0e" userLabel="Content">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="616"/>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dgk-sr-a0e" userLabel="Content">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="616.5"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="articleSampleImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="S9i-JC-aaa">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
@@ -74,12 +74,12 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VMX-UB-W2k">
-                                                <rect key="frame" x="19" y="320.5" width="337" height="200"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VMX-UB-W2k">
+                                                <rect key="frame" x="19" y="321" width="337" height="110"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <attributedString key="attributedText">
                                                     <fragment>
-                                                        <mutableString key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                                        <string key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                         <attributes>
                                                             <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
                                                         </attributes>
@@ -88,11 +88,27 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                             </textView>
+                                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pqd-PG-nbq">
+                                                <rect key="frame" x="19" y="423" width="337" height="65"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <wkWebViewConfiguration key="configuration">
+                                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                                    <wkPreferences key="preferences"/>
+                                                </wkWebViewConfiguration>
+                                            </wkWebView>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="lyA-FC-JGN">
+                                                <rect key="frame" x="19" y="496" width="337" height="121"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="VMX-UB-W2k" secondAttribute="trailing" constant="19" id="30o-4A-a66"/>
-                                            <constraint firstAttribute="bottom" secondItem="VMX-UB-W2k" secondAttribute="bottom" constant="95.5" id="9ag-Fj-qmG"/>
                                             <constraint firstItem="VMX-UB-W2k" firstAttribute="leading" secondItem="Dgk-sr-a0e" secondAttribute="leading" constant="19" id="C9Z-p4-3sv"/>
                                             <constraint firstItem="XZl-Kl-Qsh" firstAttribute="leading" secondItem="Dgk-sr-a0e" secondAttribute="leading" constant="19" id="Erj-pH-VaD"/>
                                             <constraint firstItem="XZl-Kl-Qsh" firstAttribute="top" secondItem="S9i-JC-aaa" secondAttribute="bottom" constant="18" id="Iim-eK-8Kt"/>
@@ -126,7 +142,7 @@
                         <viewLayoutGuide key="safeArea" id="l4o-yK-gVs"/>
                     </view>
                     <connections>
-                        <outlet property="bodyContent" destination="VMX-UB-W2k" id="Bec-32-2fe"/>
+                        <outlet property="bodyContent" destination="pqd-PG-nbq" id="H8z-NI-4Gu"/>
                         <outlet property="scrollContent" destination="Dgk-sr-a0e" id="V4y-M5-vpU"/>
                     </connections>
                 </viewController>
