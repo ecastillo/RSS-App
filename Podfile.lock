@@ -1,16 +1,20 @@
 PODS:
   - ContentFittingWebView (1.0.1)
+  - SwiftSoup (1.7.1)
 
 DEPENDENCIES:
   - ContentFittingWebView (~> 1.0.0)
+  - SwiftSoup
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - ContentFittingWebView
+    - SwiftSoup
 
 SPEC CHECKSUMS:
   ContentFittingWebView: 57ef573f1604427fa55ed7404400f13ad9232956
+  SwiftSoup: 277f7ef548826e0ca7603a06b30d4a5df3ee0587
 
-PODFILE CHECKSUM: dd4a20b1e34055411d03ccd7b3b9d50f002a7464
+PODFILE CHECKSUM: ac47cb2e7deed99b8b071566a22691364f48f4d5
 
-COCOAPODS: 1.5.2
+COCOAPODS: 1.5.0

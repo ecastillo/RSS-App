@@ -173,10 +173,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-RSS App/Pods-RSS App-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ContentFittingWebView/ContentFittingWebView.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftSoup/SwiftSoup.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ContentFittingWebView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSoup.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
