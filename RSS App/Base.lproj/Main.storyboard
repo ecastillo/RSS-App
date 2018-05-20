@@ -25,15 +25,26 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wuW-Om-MJU">
+                                <rect key="frame" x="128" y="318" width="82" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="View Article"/>
+                                <connections>
+                                    <action selector="viewArticleTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nrO-no-YuN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="News" id="EOZ-DO-0cf"/>
+                    <connections>
+                        <outlet property="testViewArticleButton" destination="wuW-Om-MJU" id="Pu6-ks-rNh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2057" y="-200"/>
+            <point key="canvasLocation" x="2056.8000000000002" y="-200.14992503748127"/>
         </scene>
         <!--Article View Controller-->
         <scene sceneID="rDX-RG-R8q">
@@ -73,37 +84,29 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VMX-UB-W2k" userLabel="Body Content">
-                                                <rect key="frame" x="19" y="321" width="337" height="200"/>
-                                                <color key="backgroundColor" red="0.185302734375" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <attributedString key="attributedText">
-                                                    <fragment>
-                                                        <string key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                                            </textView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYs-bO-Yeg">
+                                                <rect key="frame" x="19" y="323" width="337" height="274"/>
+                                                <color key="backgroundColor" red="0.59607843140000005" green="0.42352941179999998" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="274" placeholder="YES" id="7iL-ui-7hV"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="VMX-UB-W2k" secondAttribute="trailing" constant="19" id="30o-4A-a66"/>
-                                            <constraint firstItem="VMX-UB-W2k" firstAttribute="leading" secondItem="Dgk-sr-a0e" secondAttribute="leading" constant="19" id="C9Z-p4-3sv"/>
+                                            <constraint firstAttribute="bottom" secondItem="vYs-bO-Yeg" secondAttribute="bottom" constant="19" id="DEg-At-npw"/>
                                             <constraint firstItem="XZl-Kl-Qsh" firstAttribute="leading" secondItem="Dgk-sr-a0e" secondAttribute="leading" constant="19" id="Erj-pH-VaD"/>
                                             <constraint firstItem="XZl-Kl-Qsh" firstAttribute="top" secondItem="S9i-JC-aaa" secondAttribute="bottom" constant="18" id="Iim-eK-8Kt"/>
-                                            <constraint firstItem="VMX-UB-W2k" firstAttribute="top" secondItem="5WU-6c-K5d" secondAttribute="bottom" constant="20" id="Iot-mu-shg"/>
                                             <constraint firstItem="5WU-6c-K5d" firstAttribute="leading" secondItem="Dgk-sr-a0e" secondAttribute="leading" constant="19" id="Jbb-R5-TcK"/>
+                                            <constraint firstItem="vYs-bO-Yeg" firstAttribute="top" secondItem="5WU-6c-K5d" secondAttribute="bottom" constant="22.5" id="PGZ-ip-Mfc"/>
                                             <constraint firstItem="WCy-SL-Xvb" firstAttribute="leading" secondItem="5WU-6c-K5d" secondAttribute="trailing" constant="31" id="RoK-T6-DfG"/>
-                                            <constraint firstAttribute="bottom" secondItem="VMX-UB-W2k" secondAttribute="bottom" constant="95" placeholder="YES" id="YaV-0y-Lh4"/>
                                             <constraint firstItem="WCy-SL-Xvb" firstAttribute="top" secondItem="XZl-Kl-Qsh" secondAttribute="bottom" constant="3.5" id="Yiv-BJ-lVn"/>
+                                            <constraint firstAttribute="trailing" secondItem="vYs-bO-Yeg" secondAttribute="trailing" constant="19" id="aQw-dd-eZB"/>
                                             <constraint firstItem="S9i-JC-aaa" firstAttribute="top" secondItem="Dgk-sr-a0e" secondAttribute="top" id="hdr-Bs-Bie"/>
                                             <constraint firstItem="S9i-JC-aaa" firstAttribute="leading" secondItem="Dgk-sr-a0e" secondAttribute="leading" id="oF3-vJ-3KN"/>
                                             <constraint firstAttribute="trailing" secondItem="S9i-JC-aaa" secondAttribute="trailing" id="ocd-mJ-chF"/>
                                             <constraint firstItem="5WU-6c-K5d" firstAttribute="top" secondItem="XZl-Kl-Qsh" secondAttribute="bottom" constant="3.5" id="tPc-9G-8yy"/>
+                                            <constraint firstItem="vYs-bO-Yeg" firstAttribute="leading" secondItem="Dgk-sr-a0e" secondAttribute="leading" constant="19" id="za7-bv-KLf"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -126,7 +129,7 @@
                         <viewLayoutGuide key="safeArea" id="l4o-yK-gVs"/>
                     </view>
                     <connections>
-                        <outlet property="bodyContent" destination="VMX-UB-W2k" id="3t2-bq-QZf"/>
+                        <outlet property="bodyContent" destination="vYs-bO-Yeg" id="uMc-83-TCg"/>
                         <outlet property="scrollContent" destination="Dgk-sr-a0e" id="V4y-M5-vpU"/>
                     </connections>
                 </viewController>

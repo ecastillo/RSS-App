@@ -20,7 +20,6 @@ class IframeWebView: WKWebView {
     }
     
     func loadIframeString(iframe: String) {
-        print("started custom init for iframewebvew")
         do {
             let doc: Document = try SwiftSoup.parse(iframe)
             let iframe: Element = try! doc.select("iframe").first()!
