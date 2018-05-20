@@ -45,7 +45,33 @@ class IframeWebView: WKWebView {
         }
         
         //self.html = html
-        self.loadHTMLString(iframe, baseURL: nil)
+        let prefix = """
+                    <html><head><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no'></head><body style="margin:0">
+                    """
+        let suffix = """
+                    <script>
+                            function resizeIframe() {
+                                var iframeWidth = document.getElementsByTagName('iframe')[0].getAttribute('width');
+                                var iframeHeight = document.getElementsByTagName('iframe')[0].getAttribute('height');
+                                
+                                var scale = window.innerWidth/iframeWidth;
+                                
+                                var newIframeWidth = iframeWidth*scale;
+                                var newIframeHeight = iframeHeight*scale;
+                                
+                                document.getElementsByTagName('iframe')[0].width = newIframeWidth;
+                                document.getElementsByTagName('iframe')[0].height = newIframeHeight;
+                            }
+                            
+                            resizeIframe();
+                            
+                            window.addEventListener('resize', function() {
+                                resizeIframe();
+                            });
+                        </script>
+                    </body></html>
+                    """
+        self.loadHTMLString(prefix+iframe+suffix, baseURL: nil)
     }
     
     required init?(coder: NSCoder) {
