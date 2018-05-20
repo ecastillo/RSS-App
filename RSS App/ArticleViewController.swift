@@ -16,9 +16,10 @@ class ArticleViewController: UIViewController, UITextViewDelegate, WKUIDelegate,
 
     @IBOutlet weak var scrollContent: UIView!
     @IBOutlet weak var bodyContent: UITextView!
-    @IBOutlet weak var webView: WKWebView!
-    @IBOutlet weak var bodyContent2: UITextView!
-    @IBOutlet weak var webViewHeightConstraint: NSLayoutConstraint!
+    //@IBOutlet weak var webView: IframeWebView!
+    //@IBOutlet weak var bodyContent2: UITextView!
+    //@IBOutlet weak var webViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bodyContentBottomConstraint: NSLayoutConstraint!
     
     var webString: String = ""
     
@@ -26,7 +27,7 @@ class ArticleViewController: UIViewController, UITextViewDelegate, WKUIDelegate,
         super.viewDidLoad()
         
         bodyContent.delegate = self
-        webView.navigationDelegate = self
+        //webView.navigationDelegate = self
 
         let attributedString1 = "At its <a href=\"https://www.macrumors.com/2018/05/08/google-assistant-improvements-google-io/\">Google I/O developer conference</a> last week, Google debuted a <a href=\"https://www.blog.google/products/news/new-google-news-ai-meets-human-intelligence/\">revamped Google News app</a> focusing on balanced news delivery with personalized news suggestions, and as of today, the new Google News app is available for download on the iPhone and iPad.<br/><br/>According to Google, the News app is designed to use \"the best of artificial intelligence to find \"the best of human intelligence\" by taking advantage of new AI techniques to organize a constant flow of new information into digestible storylines.<br/><br/><img src=\"http://cdn.macrumors.com/article-new/2018/05/googlenewsapp-800x564.jpg\" alt=\"\" width=\"800\" height=\"564\" class=\"aligncenter size-large wp-image-636602\" /><br/><center>".convertHtml()
         webString = """
@@ -85,116 +86,55 @@ class ArticleViewController: UIViewController, UITextViewDelegate, WKUIDelegate,
         
         bodyContent.attributedText = attributedString1
         //webView.loadHTMLString(webString, baseURL: nil)
-        bodyContent2.attributedText = attributedString2
+        //bodyContent2.attributedText = attributedString2
         
-        //webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-
-        do {
-            let html = webString
-            let doc: Document = try SwiftSoup.parse(html)
-            let iframe: Element = try! doc.select("iframe").first()!
-            let iframeWidth: String = try! iframe.attr("width")
-            let iframeHeight: String = try! iframe.attr("height")
-            
-            print(iframeWidth)
-            //webViewHeightConstraint.constant = 2000
-            
-            if let iframeWidthNum = NumberFormatter().number(from: iframeWidth), let iframeHeightNum = NumberFormatter().number(from: iframeHeight){
-                let iframeScale = webView.bounds.width / CGFloat(truncating: iframeWidthNum)
-                let newIframeWidth = webView.frame.size.width
-                print("webView frame width: \(webView.frame.size.width)")
-                let newIframeHeight = CGFloat(truncating: iframeHeightNum) * iframeScale
-                
-                do {
-                    try doc.select("iframe").attr("width", "\(round(newIframeWidth))")
-                    try doc.select("iframe").attr("height", "\(ceil(newIframeHeight))")
-                    try print(doc.html())
-                    try webView.loadHTMLString(doc.html(), baseURL: nil)
-                    webViewHeightConstraint.constant = ceil(newIframeHeight)
-                    print(webView.frame.size.height)
-                    webView.addConstraint(NSLayoutConstraint(item: webView,
-                                                                    attribute: NSLayoutAttribute.height,
-                                                                    relatedBy: NSLayoutRelation.equal,
-                                                                    toItem: webView,
-                                                                    attribute: NSLayoutAttribute.width,
-                                                                    multiplier: newIframeHeight / newIframeWidth,
-                                                                    constant: 0))
-                    self.webView.evaluateJavaScript("window.dispatchEvent(new Event('resize'))") { (result, error) in
-                        if error != nil {
-                            print(result)
-                        }
-                    }
-                    
-                } catch Exception.Error(let type, let message) {
-                    print(message)
-                } catch {
-                    print("error")
-                }
-            }
-            
-        } catch Exception.Error(let type, let message) {
-            print(message)
-        } catch {
-            print("error")
-        }
+        let webView = IframeWebView(frame: scrollContent.bounds, configuration: WKWebViewConfiguration())
+        webView.backgroundColor = UIColor.blue
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        scrollContent.addSubview(webView)
         
-        
-        
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        coordinator.animate(alongsideTransition: nil) { _ in
-            
-            self.webView.evaluateJavaScript("window.dispatchEvent(new Event('resize'))") { (result, error) in
-                if error != nil {
-                    print(result)
-                }
-            }
-            
-            
-            
-//            do {
-//                let html = self.webString
-//                let doc: Document = try SwiftSoup.parse(html)
-//                let iframe: Element = try! doc.select("iframe").first()!
-//                let iframeWidth: String = try! iframe.attr("width")
-//                let iframeHeight: String = try! iframe.attr("height")
-//
-//                print(iframeWidth)
-//                //webViewHeightConstraint.constant = 2000
-//
-//                if let iframeWidthNum = NumberFormatter().number(from: iframeWidth), let iframeHeightNum = NumberFormatter().number(from: iframeHeight){
-//                    let iframeScale = self.webView.bounds.width / CGFloat(truncating: iframeWidthNum)
-//                    let newIframeWidth = CGFloat(truncating: iframeWidthNum) * iframeScale
-//                    let newIframeHeight = CGFloat(truncating: iframeHeightNum) * iframeScale
-//
-//                    do {
-//                        try doc.select("iframe").attr("width", "\(round(newIframeWidth))")
-//                        try doc.select("iframe").attr("height", "\(round(newIframeHeight))")
-//                        try print(doc.html())
-//                        try self.webView.loadHTMLString(doc.html(), baseURL: nil)
-//                        self.webViewHeightConstraint.constant = round(newIframeHeight)
-//                    } catch Exception.Error(let type, let message) {
-//                        print(message)
-//                    } catch {
-//                        print("error")
-//                    }
-//                }
-//
-//            } catch Exception.Error(let type, let message) {
-//                print(message)
-//            } catch {
-//                print("error")
-//            }
-        }
+        webView.loadIframeString(iframe: webString)
+        print("webview frame width: \(webView.frame.width)")
+        print("new iframe height: \(webView.bounds.width / webView.aspectRatio!)")
+        //bodyContent.removeConstraint(bodyContentBottomConstraint)
+        scrollContent.addConstraint(NSLayoutConstraint(item: webView,
+                                                 attribute: .top,
+                                                 relatedBy: .equal,
+                                                 toItem: bodyContent,
+                                                 attribute: .bottom,
+                                                 multiplier: 1.0,
+                                                 constant: 10))
+        scrollContent.addConstraint(NSLayoutConstraint(item: webView,
+                                                 attribute: .leading,
+                                                 relatedBy: .equal,
+                                                 toItem: scrollContent,
+                                                 attribute: .leading,
+                                                 multiplier: 1.0,
+                                                 constant: 19))
+        scrollContent.addConstraint(NSLayoutConstraint(item: scrollContent,
+                                                 attribute: .trailing,
+                                                 relatedBy: .equal,
+                                                 toItem: webView,
+                                                 attribute: .trailing,
+                                                 multiplier: 1.0,
+                                                 constant: 19))
+        scrollContent.addConstraint(NSLayoutConstraint(item: webView,
+                                                       attribute: .bottom,
+                                                       relatedBy: .equal,
+                                                       toItem: scrollContent,
+                                                       attribute: .bottom,
+                                                       multiplier: 1.0,
+                                                       constant: 0))
+        webView.addConstraint(NSLayoutConstraint(item: webView,
+                                                        attribute: .height,
+                                                        relatedBy: .equal,
+                                                        toItem: webView,
+                                                        attribute: .width,
+                                                        multiplier: 1/webView.aspectRatio!,
+                                                        constant: 0))
     }
 
-//    override func viewWillAppear(_ animated: Bool) {
-//        let newFrame = CGRect(x: self.view.frame.origin.x, y: self.view.frame.origin.y, width: 200, height: 200)
-//        scrollContent.frame = newFrame
-//        self.view.layoutIfNeeded()
-//    }
+
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         print(URL)
@@ -203,19 +143,7 @@ class ArticleViewController: UIViewController, UITextViewDelegate, WKUIDelegate,
         return false
     }
     
-//    func webViewDidFinishLoad(_ webView: UIWebView) {
-//        print("webview finished loading");
-//        var newBounds = webView.bounds
-//        newBounds.size.height = webView.scrollView.contentSize.height
-//        webView.bounds = newBounds
-//    }
-    
-//    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-//        print("webview finished loading");
-//        var newBounds = webView.bounds
-//        newBounds.size.height = 400 //webView.scrollView.contentSize.height
-//        webView.bounds = newBounds
-//    }
+
     
     
     

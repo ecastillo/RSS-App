@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07B4563B20B079D8000220FB /* IframeWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B4563A20B079D8000220FB /* IframeWebView.swift */; };
+		07B4563D20B0EBE7000220FB /* testViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B4563C20B0EBE7000220FB /* testViewController.swift */; };
 		07EEFD1A20AA630B00715920 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EEFD1920AA630B00715920 /* AppDelegate.swift */; };
 		07EEFD1C20AA630B00715920 /* NewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EEFD1B20AA630B00715920 /* NewsListViewController.swift */; };
 		07EEFD1F20AA630B00715920 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07EEFD1D20AA630B00715920 /* Main.storyboard */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		07B4563A20B079D8000220FB /* IframeWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IframeWebView.swift; sourceTree = "<group>"; };
+		07B4563C20B0EBE7000220FB /* testViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testViewController.swift; sourceTree = "<group>"; };
 		07EEFD1620AA630B00715920 /* RSS App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RSS App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07EEFD1920AA630B00715920 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		07EEFD1B20AA630B00715920 /* NewsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListViewController.swift; sourceTree = "<group>"; };
@@ -68,7 +72,9 @@
 				07EEFD1920AA630B00715920 /* AppDelegate.swift */,
 				07EEFD1B20AA630B00715920 /* NewsListViewController.swift */,
 				07EEFD2B20AA671F00715920 /* ArticleViewController.swift */,
+				07B4563A20B079D8000220FB /* IframeWebView.swift */,
 				07EEFD1D20AA630B00715920 /* Main.storyboard */,
+				07B4563C20B0EBE7000220FB /* testViewController.swift */,
 				07EEFD2020AA630C00715920 /* Assets.xcassets */,
 				07EEFD2220AA630C00715920 /* LaunchScreen.storyboard */,
 				07EEFD2520AA630C00715920 /* Info.plist */,
@@ -213,6 +219,8 @@
 				07EEFD1C20AA630B00715920 /* NewsListViewController.swift in Sources */,
 				07EEFD2C20AA671F00715920 /* ArticleViewController.swift in Sources */,
 				07EEFD1A20AA630B00715920 /* AppDelegate.swift in Sources */,
+				07B4563D20B0EBE7000220FB /* testViewController.swift in Sources */,
+				07B4563B20B079D8000220FB /* IframeWebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
