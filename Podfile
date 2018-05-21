@@ -8,5 +8,8 @@ target 'RSS App' do
   # Pods for RSS App
   pod 'ContentFittingWebView', '~> 1.0.0'
   pod 'SwiftSoup'
+  pod 'FeedKit'
+  pod 'DateToolsSwift'
+  pod 'SDWebImage', '~> 4.0'
 
 end

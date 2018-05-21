@@ -12,33 +12,23 @@ import SafariServices
 //import ContentFittingWebView
 import SwiftSoup
 import Foundation
+import FeedKit
+import DateToolsSwift
 
 class ArticleViewController: UIViewController, UITextViewDelegate, WKUIDelegate, WKNavigationDelegate {
 
     @IBOutlet weak var scrollContent: UIView!
+    @IBOutlet weak var featuredImage: UIImageView!
+    @IBOutlet weak var articleTitle: UILabel!
+    @IBOutlet weak var website: UIButton!
+    @IBOutlet weak var date: UILabel!
     @IBOutlet weak var bodyContent: UIView!
     
     var articleSubviews = [UIView]()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        //bodyContent.delegate = self
-        //webView.navigationDelegate = self
-
-        //560x315
-        //337x190
-
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 5
-        
-        let att = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.medium),
-                   NSAttributedStringKey.paragraphStyle: paragraphStyle]
-        //attributedString1.addAttributes(att, range: NSRange(location: 0, length: attributedString1.length))
-        
-        
-        
-        let test = """
+    var article: RSSFeedItem?
+    
+    var articleContent = """
 <iframe width="560" height="315" src="https://www.youtube.com/embed/tnmfr0KxDHg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></center><center><em><a href="https://www.youtube.com/user/macrumors?sub_confirmation=1">Subscribe to the MacRumors YouTube channel</a> for more videos.</em></center>
 <br/>
 The Google News app is a reimagining and revamp to the existing Google Newsstand Play app that was previously available via the iOS App Store. It's been entirely overhauled though, with a simple, clean interface that's fairly similar to the look of Apple News with a dedicated navigation bar at the bottom.
@@ -72,26 +62,39 @@ Have you checked out Google News? Do you prefer it over Apple's own news app? Le
 <a href="http://feeds.macrumors.com/~ff/MacRumors-All?a=yftAeWQRmT4:JDxgeTz4zoA:6W8y8wAjSf4"><img src="http://feeds.feedburner.com/~ff/MacRumors-All?d=6W8y8wAjSf4" border="0"></img></a> <a href="http://feeds.macrumors.com/~ff/MacRumors-All?a=yftAeWQRmT4:JDxgeTz4zoA:qj6IDK7rITs"><img src="http://feeds.feedburner.com/~ff/MacRumors-All?d=qj6IDK7rITs" border="0"></img></a>
 </div><img src="http://feeds.feedburner.com/~r/MacRumors-All/~4/yftAeWQRmT4" height="1" width="1" alt=""/><iframe width="560" height="315" src="https://www.youtube.com/embed/tnmfr0KxDHg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 """
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
+        articleTitle.text = article?.title
         
+        if let link = article?.link {
+            let url = URL(string: link)
+            let domain = url?.host?.replacingOccurrences(of: "^www\\.*", with: "", options: .regularExpression)
+            website.setTitle(domain, for: .normal)
+        }
         
-//        attributedString.enumerateAttribute(NSAttributedStringKey.attachment, in: NSMakeRange(0, attributedString.length), options: .init(rawValue: 0), using: { (value, range, stop) in
-//            if let attachement = value as? NSTextAttachment {
-//                let image = attachement.image(forBounds: attachement.bounds, textContainer: NSTextContainer(), characterIndex: range.location)!
-//                let contentSize: CGRect = self.bodyContent.bounds
-//                print("image width: \(image.size.width)")
-//                print("content width: \(contentSize.width)")
-//                if image.size.width > contentSize.width {
-//                    let newImage = image.resizeImage(scale: contentSize.width/image.size.width)
-//                    let newAttribut = NSTextAttachment()
-//                    newAttribut.image = newImage
-//                    attributedString.addAttribute(NSAttributedStringKey.attachment, value: newAttribut, range: range)
-//                }
-//            }
-//        })
+        date.text = article?.pubDate?.timeAgoSinceNow
         
+        do {
+            let doc: Document = try SwiftSoup.parse(article!.description!)
+            let img: Element = try! doc.select("img").first()!
+            let imgSrc: String = try! img.attr("src")
+            let data = try Data(contentsOf: URL(string: imgSrc)!)
+            let imgz = UIImage(data: data)
+            if(Int((imgz?.size.width)!) > 200) {
+                featuredImage.sd_setImage(with: URL(string: imgSrc), placeholderImage: nil)
+            }
+        } catch Exception.Error(let type, let message) {
+            print(message)
+        } catch {
+            print("error")
+        }
 
-        let sections = splitArticleIntoSections(html: test)
+        //560x315
+        //337x190
+        
+        let sections = splitArticleIntoSections(html: (article?.description!)!)
         addArticleSubviews(sections: sections)
     }
 
@@ -124,13 +127,45 @@ Have you checked out Google News? Do you prefer it over Apple's own news app? Le
                 let textView = UITextView(frame: bodyContent.bounds)
                 textView.isEditable = false
                 textView.isScrollEnabled = false
-                textView.attributedText = section.html.convertHtml()
+                
+                textView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0)
+                textView.textContainer.lineFragmentPadding = 0.0
+                
+                let attributedString = section.html.convertHtml()
+                
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.lineSpacing = 5
+                let att = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.medium),
+                           NSAttributedStringKey.paragraphStyle: paragraphStyle]
+                attributedString.addAttributes(att, range: NSRange(location: 0, length: attributedString.length))
+                
+                attributedString.enumerateAttribute(NSAttributedStringKey.attachment, in: NSMakeRange(0, attributedString.length), options: .init(rawValue: 0), using: { (value, range, stop) in
+                    if let attachement = value as? NSTextAttachment {
+                        let image = attachement.image(forBounds: attachement.bounds, textContainer: NSTextContainer(), characterIndex: range.location)!
+                        let contentSize: CGRect = textView.bounds
+                        if image.size.width > contentSize.width {
+                            let newImage = image.resizeImage(scale: contentSize.width/image.size.width)
+                            let newAttribute = NSTextAttachment()
+                            newAttribute.image = newImage
+                            attributedString.addAttribute(NSAttributedStringKey.attachment, value: newAttribute, range: range)
+                        }
+                        
+                        let paragraphStyle = NSMutableParagraphStyle()
+                        paragraphStyle.alignment = .center
+                        let att = [NSAttributedStringKey.paragraphStyle: paragraphStyle]
+                        attributedString.addAttributes(att, range: range)
+                        
+                        let lineBreak = NSAttributedString(string: "\n")
+                        attributedString.insert(lineBreak, at: range.upperBound)
+                    }
+                })
+                
+                textView.attributedText = attributedString
                 textView.delegate = self
                 
                 sectionView = textView
             }
             
-            sectionView.backgroundColor = UIColor.blue
             sectionView.translatesAutoresizingMaskIntoConstraints = false
             
             bodyContent.addSubview(sectionView)
@@ -157,7 +192,12 @@ Have you checked out Google News? Do you prefer it over Apple's own news app? Le
         }
     }
     
-
+    @IBAction func websiteButtonTapped(_ sender: UIButton) {
+        let url = URL(string: (article?.link)!)
+        let svc = SFSafariViewController(url: url!)
+        self.present(svc, animated: true, completion: nil)
+    }
+    
 }
 
 extension String{
@@ -176,6 +216,16 @@ extension UIImage {
         let newSize = CGSize(width: self.size.width*scale, height: self.size.height*scale)
         let rect = CGRect(origin: CGPoint.zero, size: newSize)
         print("new image width: \(self.size.width*scale)")
+        UIGraphicsBeginImageContext(newSize)
+        self.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
+    }
+    
+    func resizeImage(size: CGFloat) -> UIImage {
+        let newSize = CGSize(width: size, height: size)
+        let rect = CGRect(origin: CGPoint.zero, size: newSize)
         UIGraphicsBeginImageContext(newSize)
         self.draw(in: rect)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
