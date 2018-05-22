@@ -14,6 +14,7 @@ import SwiftSoup
 import Foundation
 import FeedKit
 import DateToolsSwift
+import SubviewAttachingTextView
 
 class ArticleViewController: UIViewController, UITextViewDelegate, WKUIDelegate, WKNavigationDelegate {
 
@@ -22,7 +23,7 @@ class ArticleViewController: UIViewController, UITextViewDelegate, WKUIDelegate,
     @IBOutlet weak var articleTitle: UILabel!
     @IBOutlet weak var website: UIButton!
     @IBOutlet weak var date: UILabel!
-    @IBOutlet weak var bodyContent: UIView!
+    @IBOutlet weak var bodyContent: SubviewAttachingTextView!
     
     var articleSubviews = [UIView]()
     
@@ -94,8 +95,10 @@ Have you checked out Google News? Do you prefer it over Apple's own news app? Le
         //560x315
         //337x190
         
-        let sections = splitArticleIntoSections(html: (article?.description!)!)
-        addArticleSubviews(sections: sections)
+        //let sections = splitArticleIntoSections(html: (article?.description!)!)
+        //addArticleSubviews(sections: sections)
+        
+        test()
     }
 
 
@@ -196,6 +199,25 @@ Have you checked out Google News? Do you prefer it over Apple's own news app? Le
         let url = URL(string: (article?.link)!)
         let svc = SFSafariViewController(url: url!)
         self.present(svc, animated: true, completion: nil)
+    }
+    
+    func test() {
+        if let html = article?.description {
+            let mutableAttributedString = html.convertHtml()
+        
+            let iframes = html.ranges(of: "<iframe(.*?)</iframe>", options: .regularExpression).map{html[$0]}
+        
+            for iframe in iframes.reversed() {
+                let iframeView = IframeWebView(frame: CGRect(x: 20, y: 20, width: 100, height: 70))
+                iframeView.loadIframeString(iframe: String(iframe))
+                let subviewTextAttachment = SubviewTextAttachment(view: iframeView)
+                let attributedString = NSAttributedString(attachment: subviewTextAttachment)
+                let iframeRange = iframe.startIndex..<iframe.endIndex
+                mutableAttributedString.replaceCharacters(in: NSRange(iframeRange, in: html), with: attributedString)
+            }
+
+            bodyContent.attributedText = mutableAttributedString
+        }
     }
     
 }

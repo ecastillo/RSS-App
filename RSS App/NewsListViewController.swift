@@ -15,6 +15,7 @@ class NewsListViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     var feedURL: String = "http://feeds.macrumors.com/MacRumors-All"
     var articlesArray = [FeedKit.RSSFeedItem]()
+    var articleImageURLs = [URL]()
     
     @IBOutlet weak var articleCollectionView: UICollectionView!
     
@@ -38,16 +39,9 @@ class NewsListViewController: UIViewController, UICollectionViewDelegate, UIColl
         cell.date.text = selectedArticle.pubDate?.timeAgoSinceNow
         
         do {
-            let doc: Document = try SwiftSoup.parse(selectedArticle.description!)
-            let img: Element = try! doc.select("img").first()!
-            let imgSrc: String = try! img.attr("src")
-            //let data = try Data(contentsOf: URL(string: imgSrc)!)
-            //let imgz = UIImage(data: data)
             //if(Int((imgz?.size.width)!) > 200) {
-            cell.image.sd_setImage(with: URL(string: imgSrc), placeholderImage: nil)
-            let resizedImage = cell.image.image?.resizeImage(size: 50)
-            cell.image.image = resizedImage
-            //}
+            let articleImageURL = articleImageURLs[indexPath.row]
+            cell.image.sd_setImage(with: articleImageURL, placeholderImage: nil)
         } catch Exception.Error(let type, let message) {
             print(message)
         } catch {
@@ -81,6 +75,18 @@ class NewsListViewController: UIViewController, UICollectionViewDelegate, UIColl
                     case let .rss(feed):        // Really Simple Syndication Feed Model
                         print("rss obtained!")
                         self.articlesArray = feed.items!
+                        do {
+                            for article in self.articlesArray {
+                                let doc: Document = try SwiftSoup.parse(article.description!)
+                                let img: Element = try! doc.select("img").first()!
+                                let imgSrc: String = try! img.attr("src")
+                                self.articleImageURLs.append(URL(string: imgSrc)!)
+                            }
+                        } catch Exception.Error(let type, let message) {
+                            print(message)
+                        } catch {
+                            print("error")
+                        }
                         self.articleCollectionView.reloadData()
                     case let .json(feed):       // JSON Feed Model
                         print("json obtained!")

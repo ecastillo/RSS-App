@@ -11,5 +11,6 @@ target 'RSS App' do
   pod 'FeedKit'
   pod 'DateToolsSwift'
   pod 'SDWebImage', '~> 4.0'
+  pod 'SubviewAttachingTextView'
 
 end
