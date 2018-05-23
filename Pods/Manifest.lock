@@ -1,6 +1,24 @@
 PODS:
+  - Atributika (4.4.2)
   - ContentFittingWebView (1.0.1)
   - DateToolsSwift (4.0.0)
+  - DTCoreText (1.6.21):
+    - DTCoreText/Core (= 1.6.21)
+    - DTFoundation/Core (~> 1.7.5)
+    - DTFoundation/DTAnimatedGIF (~> 1.7.5)
+    - DTFoundation/DTHTMLParser (~> 1.7.5)
+    - DTFoundation/UIKit (~> 1.7.5)
+  - DTCoreText/Core (1.6.21):
+    - DTFoundation/Core (~> 1.7.5)
+    - DTFoundation/DTAnimatedGIF (~> 1.7.5)
+    - DTFoundation/DTHTMLParser (~> 1.7.5)
+    - DTFoundation/UIKit (~> 1.7.5)
+  - DTFoundation/Core (1.7.13)
+  - DTFoundation/DTAnimatedGIF (1.7.13)
+  - DTFoundation/DTHTMLParser (1.7.13):
+    - DTFoundation/Core
+  - DTFoundation/UIKit (1.7.13):
+    - DTFoundation/Core
   - FeedKit (7.1.0)
   - SDWebImage (4.3.3):
     - SDWebImage/Core (= 4.3.3)
@@ -9,8 +27,10 @@ PODS:
   - SwiftSoup (1.7.1)
 
 DEPENDENCIES:
+  - Atributika
   - ContentFittingWebView (~> 1.0.0)
   - DateToolsSwift
+  - DTCoreText
   - FeedKit
   - SDWebImage (~> 4.0)
   - SubviewAttachingTextView
@@ -18,21 +38,27 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - Atributika
     - ContentFittingWebView
     - DateToolsSwift
+    - DTCoreText
+    - DTFoundation
     - FeedKit
     - SDWebImage
     - SubviewAttachingTextView
     - SwiftSoup
 
 SPEC CHECKSUMS:
+  Atributika: 61cf7794646bd033cd19aad1b8f7e1cae8daa877
   ContentFittingWebView: 57ef573f1604427fa55ed7404400f13ad9232956
   DateToolsSwift: 875d97ff9e3a5d54abdd67a269b3f51c757b71ab
+  DTCoreText: e5d688cffc9f6a61eddd1a4f94e2046851230de3
+  DTFoundation: f03be9fd786f11e505bb8fc44e2a3732bf0917df
   FeedKit: 428e7e70f9b8993e609c52160d00c94fabdb22ef
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
   SubviewAttachingTextView: 27a6ae7bde3b891b15d85ea2aee4b6d635b34a32
   SwiftSoup: 277f7ef548826e0ca7603a06b30d4a5df3ee0587
 
-PODFILE CHECKSUM: d9de6a8d8e9bc3eaca09617a967d986ad6e1fd5e
+PODFILE CHECKSUM: ba54fb23a062d443955badad3436c4f10a91e30d
 
 COCOAPODS: 1.5.0

@@ -15,6 +15,8 @@ import Foundation
 import FeedKit
 import DateToolsSwift
 import SubviewAttachingTextView
+import Atributika
+import DTCoreText
 
 class ArticleViewController: UIViewController, UITextViewDelegate, WKUIDelegate, WKNavigationDelegate {
 
@@ -24,6 +26,7 @@ class ArticleViewController: UIViewController, UITextViewDelegate, WKUIDelegate,
     @IBOutlet weak var website: UIButton!
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var bodyContent: SubviewAttachingTextView!
+    
     
     var articleSubviews = [UIView]()
     
@@ -203,26 +206,49 @@ Have you checked out Google News? Do you prefer it over Apple's own news app? Le
     
     func test() {
         if let html = article?.description {
-            let mutableAttributedString = html.convertHtml()
+            let attributedString = html.convertHtml()
+            let mutableAttributedString = NSMutableAttributedString(attributedString: attributedString)
+            
+//            let data = html.data(using: .utf8)
+//            let attrString = NSAttributedString(htmlData: data, options:[DTUseiOS6Attributes: true, DTMaxImageSize: CGSize(width: 40, height: 40)], documentAttributes:nil)
+            //print(attrString)
+            //self.leadStory.attributedText = attrString!
         
-            let iframes = html.ranges(of: "<iframe(.*?)</iframe>", options: .regularExpression).map{html[$0]}
-        
-            for iframe in iframes.reversed() {
-                let iframeView = IframeWebView(frame: CGRect(x: 20, y: 20, width: 100, height: 70))
-                iframeView.loadIframeString(iframe: String(iframe))
-                let subviewTextAttachment = SubviewTextAttachment(view: iframeView)
-                let attributedString = NSAttributedString(attachment: subviewTextAttachment)
-                let iframeRange = iframe.startIndex..<iframe.endIndex
-                mutableAttributedString.replaceCharacters(in: NSRange(iframeRange, in: html), with: attributedString)
-            }
+//            let iframes = html.ranges(of: "<iframe(.*?)</iframe>", options: .regularExpression).map{html[$0]}
+//        
+//            for iframe in iframes.reversed() {
+//                let iframeView = IframeWebView(frame: CGRect(x: 20, y: 20, width: 100, height: 70))
+//                iframeView.loadIframeString(iframe: String(iframe))
+//                let subviewTextAttachment = SubviewTextAttachment(view: iframeView)
+//                let attributedString = NSAttributedString(attachment: subviewTextAttachment)
+//                let iframeRange = iframe.startIndex..<iframe.endIndex
+//                mutableAttributedString.replaceCharacters(in: NSRange(iframeRange, in: html), with: attributedString)
+//            }
 
+//            let test = DTHTMLAttributedStringBuilder(html: data, options: nil, documentAttributes: nil).generatedAttributedString()
+//            bodyContent.attributedText = test
+//            print(test)
+            
+            //bodyContent.attributedString = attrString
+//            bodyContent.translatesAutoresizingMaskIntoConstraints = true
+//            bodyContent.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            
             bodyContent.attributedText = mutableAttributedString
+            
         }
     }
     
+//    override func viewDidLayoutSubviews() {
+//        bodyContent.frame = CGRect(x: bodyContent.frame.origin.x, y: bodyContent.frame.origin.y, width: bodyContent.frame.width, height: bodyContent.attributedTextContentView.frame.height)
+//        bodyContent.backgroundColor = UIColor.red
+//        bodyContent.attributedTextContentView.backgroundColor = UIColor.blue
+//    }
+    
 }
 
-extension String{
+
+
+extension String {
     func convertHtml() -> NSMutableAttributedString{
         guard let data = data(using: .utf8) else { return NSMutableAttributedString() }
         do {

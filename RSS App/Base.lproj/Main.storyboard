@@ -160,7 +160,7 @@
                     </view>
                     <connections>
                         <outlet property="articleTitle" destination="XZl-Kl-Qsh" id="KlW-aX-7cs"/>
-                        <outlet property="bodyContent" destination="0gP-yj-yNz" id="mcG-51-HU9"/>
+                        <outlet property="bodyContent" destination="0gP-yj-yNz" id="i3u-Mi-3E5"/>
                         <outlet property="date" destination="WCy-SL-Xvb" id="XK0-Aq-Uvd"/>
                         <outlet property="featuredImage" destination="S9i-JC-aaa" id="pEu-of-s39"/>
                         <outlet property="scrollContent" destination="Dgk-sr-a0e" id="V4y-M5-vpU"/>

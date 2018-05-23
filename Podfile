@@ -12,5 +12,7 @@ target 'RSS App' do
   pod 'DateToolsSwift'
   pod 'SDWebImage', '~> 4.0'
   pod 'SubviewAttachingTextView'
+  pod 'DTCoreText'
+  pod 'Atributika'
 
 end
