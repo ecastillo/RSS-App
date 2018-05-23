@@ -219,9 +219,9 @@ Have you checked out Google News? Do you prefer it over Apple's own news app? Le
             //let attributedString = html.convertHtml()
             //let mutableAttributedString = NSMutableAttributedString(attributedString: attributedString)
             
-            let data = html.data(using: .utf8)
-            let attrString = NSAttributedString(htmlData: data, options:[DTUseiOS6Attributes: true, DTMaxImageSize: CGSize(width: 40, height: 40)], documentAttributes:nil)
-            var muteAttString = NSMutableAttributedString(attributedString: attrString!)
+//            let data = html.data(using: .utf8)
+//            let attrString = NSAttributedString(htmlData: data, options:[DTUseiOS6Attributes: true, DTMaxImageSize: CGSize(width: 40, height: 40)], documentAttributes:nil)
+//            var muteAttString = NSMutableAttributedString(attributedString: attrString!)
             //print(attrString)
             //self.leadStory.attributedText = attrString!
         
@@ -245,33 +245,43 @@ Have you checked out Google News? Do you prefer it over Apple's own news app? Le
 //            bodyContent.translatesAutoresizingMaskIntoConstraints = true
 //            bodyContent.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             
+            
+            
+            
+            
+
+            var string = """
+                        hello<img src="http://placehold.it/200x200" width="200" height="200">world
+                        """
+
+            let imgs = string.ranges(of: "<img(.*?)>", options: .regularExpression).map{string[$0]}
+            var imgRange = "fewswfe".ranges(of: "ew").first
+            var newRange = "fewswfe".ranges(of: "ew").first
+            for img in imgs.reversed() {
+                //imgArray.append(String(img))
+                //let iframeView = IframeWebView(frame: CGRect(x: 20, y: 20, width: 100, height: 70))
+                //iframeView.loadIframeString(iframe: String(iframe))
+                //let subviewTextAttachment = SubviewTextAttachment(view: iframeView)
+                //let attributedString = NSAttributedString(attachment: subviewTextAttachment)
+                imgRange = img.startIndex..<img.endIndex
+                //mutableAttributedString.replaceCharacters(in: NSRange(imgRange, in: string), with: attributedString)
+                string.replaceSubrange(imgRange!, with: "zxcv1")
+                newRange = string.range(of: "zxcv1")
+            }
+            
+            let data = string.data(using: .utf8)
+            let attrString = NSAttributedString(htmlData: data, options:[DTUseiOS6Attributes: true, DTMaxImageSize: CGSize(width: 40, height: 40)], documentAttributes:nil)
+            var muteAttString = NSMutableAttributedString(attributedString: attrString!)
+            //var imgArray = [String]()
+            
             let textAttachment = NSTextAttachment()
             textAttachment.image = UIImage(named: "articleSampleImage.png")
             var attrStringWithImage = NSAttributedString(attachment: textAttachment)
-            muteAttString.replaceCharacters(in: NSMakeRange(4, 1), with: attrStringWithImage)
+            muteAttString.replaceCharacters(in: NSRange(newRange!, in: string), with: attrStringWithImage)
             
             bodyContent.attributedText = muteAttString
             
-//
-//            var string = "hello"
-//            var imgArray = [String]()
-//
-//            let imgs = string.ranges(of: "<img(.*?)>", options: .regularExpression).map{string[$0]}
-//            for img in imgs.reversed() {
-//                imgArray.append(String(img))
-//                //let iframeView = IframeWebView(frame: CGRect(x: 20, y: 20, width: 100, height: 70))
-//                //iframeView.loadIframeString(iframe: String(iframe))
-//                //let subviewTextAttachment = SubviewTextAttachment(view: iframeView)
-//                //let attributedString = NSAttributedString(attachment: subviewTextAttachment)
-//                let imgRange = img.startIndex..<img.endIndex
-//                //mutableAttributedString.replaceCharacters(in: NSRange(imgRange, in: string), with: attributedString)
-//                string.replaceSubrange(imgRange, with: "zxcv1")
-//
-//
-//            }
-            
-            
-            
+            //muteAttString.ran
             
         }
     }
