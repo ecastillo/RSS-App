@@ -205,12 +205,23 @@ Have you checked out Google News? Do you prefer it over Apple's own news app? Le
     }
     
     func test() {
-        if let html = article?.description {
-            let attributedString = html.convertHtml()
-            let mutableAttributedString = NSMutableAttributedString(attributedString: attributedString)
+        if var html = article?.description {
+            print(html)
+            html = """
+                    That video is "<a href="https://www.youtube.com/watch?v=FdS3tjEIqUA">I Am Pressing The Spacebar and Nothing Is Happening</a>," uploaded to YouTube by <a href="https://www.youtube.com/watch?v=4pH-bEzMCZM">song-a-day</a> musician Jonathan Mann.
+                    <br/>
+
+                    <br/>
+                    <center><iframe width="560" height="315" src="https://www.youtube.com/embed/FdS3tjEIqUA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></center>
+                    <br/>
+                    The complaint adds that Apple is "aware of" or "should have known" about the defect through either pre-release product testing, customer complaints, or a combination of the two, but has "at all times failed to disclose that the keyboard is defective" because repairs and replacements prove to be costly.<blockquote>Apple knew or should have known of the butterfly keyboard defects before the Laptops were ever sold to the public, as a result of standard pre-release product testing. Further… Apple knew or should have known that that the Laptops were defective shortly after the 12-inch MacBooks were initially launched in 2015, and shortly after the MacBook Pros were launched in 2016, because, shortly after each launch, the keyboard was the subject of numerous consumer complaints published on the Company's website and a variety of internet message boards, such as MacRumors, social and traditional media, and retailer websites. Apple continuously monitors its own website as well as other web pages, including MacRumors…</blockquote>This complaint, like the first, acknowledges that Apple provides a <a href="https://support.apple.com/en-us/HT205662">support document</a> with instructions to clean the keyboard of a MacBook or MacBook Pro with "an unresponsive key or "a key that feels different than the other keys," but notes that the steps "will not permanently repair the defect."
+                    """
+            //let attributedString = html.convertHtml()
+            //let mutableAttributedString = NSMutableAttributedString(attributedString: attributedString)
             
-//            let data = html.data(using: .utf8)
-//            let attrString = NSAttributedString(htmlData: data, options:[DTUseiOS6Attributes: true, DTMaxImageSize: CGSize(width: 40, height: 40)], documentAttributes:nil)
+            let data = html.data(using: .utf8)
+            let attrString = NSAttributedString(htmlData: data, options:[DTUseiOS6Attributes: true, DTMaxImageSize: CGSize(width: 40, height: 40)], documentAttributes:nil)
+            var muteAttString = NSMutableAttributedString(attributedString: attrString!)
             //print(attrString)
             //self.leadStory.attributedText = attrString!
         
@@ -225,7 +236,8 @@ Have you checked out Google News? Do you prefer it over Apple's own news app? Le
 //                mutableAttributedString.replaceCharacters(in: NSRange(iframeRange, in: html), with: attributedString)
 //            }
 
-//            let test = DTHTMLAttributedStringBuilder(html: data, options: nil, documentAttributes: nil).generatedAttributedString()
+            //var test = DTHTMLAttributedStringBuilder(html: data, options: [DTUseiOS6Attributes: true, DTMaxImageSize: CGSize(width: 40, height: 40)], documentAttributes: nil).generatedAttributedString()
+            //var test2 = NSMutableAttributedString(attributedString: test!)
 //            bodyContent.attributedText = test
 //            print(test)
             
@@ -233,7 +245,33 @@ Have you checked out Google News? Do you prefer it over Apple's own news app? Le
 //            bodyContent.translatesAutoresizingMaskIntoConstraints = true
 //            bodyContent.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             
-            bodyContent.attributedText = mutableAttributedString
+            let textAttachment = NSTextAttachment()
+            textAttachment.image = UIImage(named: "articleSampleImage.png")
+            var attrStringWithImage = NSAttributedString(attachment: textAttachment)
+            muteAttString.replaceCharacters(in: NSMakeRange(4, 1), with: attrStringWithImage)
+            
+            bodyContent.attributedText = muteAttString
+            
+//
+//            var string = "hello"
+//            var imgArray = [String]()
+//
+//            let imgs = string.ranges(of: "<img(.*?)>", options: .regularExpression).map{string[$0]}
+//            for img in imgs.reversed() {
+//                imgArray.append(String(img))
+//                //let iframeView = IframeWebView(frame: CGRect(x: 20, y: 20, width: 100, height: 70))
+//                //iframeView.loadIframeString(iframe: String(iframe))
+//                //let subviewTextAttachment = SubviewTextAttachment(view: iframeView)
+//                //let attributedString = NSAttributedString(attachment: subviewTextAttachment)
+//                let imgRange = img.startIndex..<img.endIndex
+//                //mutableAttributedString.replaceCharacters(in: NSRange(imgRange, in: string), with: attributedString)
+//                string.replaceSubrange(imgRange, with: "zxcv1")
+//
+//
+//            }
+            
+            
+            
             
         }
     }
