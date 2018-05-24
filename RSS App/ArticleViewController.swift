@@ -206,7 +206,7 @@ Have you checked out Google News? Do you prefer it over Apple's own news app? Le
     
     func test() {
         if var html = article?.description {
-            print(html)
+            //print(html)
             html = """
                     That video is "<a href="https://www.youtube.com/watch?v=FdS3tjEIqUA">I Am Pressing The Spacebar and Nothing Is Happening</a>," uploaded to YouTube by <a href="https://www.youtube.com/watch?v=4pH-bEzMCZM">song-a-day</a> musician Jonathan Mann.
                     <br/>
@@ -251,13 +251,96 @@ Have you checked out Google News? Do you prefer it over Apple's own news app? Le
             
 
             var string = """
-                        hello<img src="http://placehold.it/200x200" width="200" height="200">world
+                        <div class="content">Apple plans to introduce the next-generation version of iOS, iOS 12, on June 4 at its Worldwide Developers Conference. Rumors have suggested this is going to be a bug fix and performance improvement update, with Apple delaying some features until iOS 13 to focus on these internal changes.
+                        <br>
+
+                        <br>
+                        There are, however, rumors that we may see updates that include cross-platform apps for Mac and iOS devices, new Animoji, Animoji support for FaceTime, updated parental controls, and an enhanced version of Do Not Disturb. Rumors never cover all of the features that we see in new versions of iOS, though, so there could be additional changes in the works.
+                        <br>
+
+                        <br>
+                        <img src="//cdn.macrumors.com/article-new/2018/01/ios12-800x438.jpg" alt="" width="800" height="438" class="aligncenter size-large wp-image-618020">
+                        <br>
+                        With that in mind, we've taken a look at some of the most-desired features <em>MacRumors</em> readers are hoping for in iOS 12, <a href="//forums.macrumors.com/threads/ios-12-wishlist.2106430">pulled from our forums</a>.
+                        <br>
+
+                        <br>
+                        <h2>User Interface Changes</h2>
+                        <br>
+                        <ul>
+                        <li><strong>Dark mode</strong> - Unsurprisingly, a system wide dark mode for iOS is one of the <a href="//forums.macrumors.com/threads/ios-12-wishlist.2106430/#post-25822552">most hoped for</a> features for iOS 12, just as it was for iOS 11 and iOS 10. Apple users have wanted a true dark mode for years, but there's no word that it's coming in iOS 12. <br><br><img src="//cdn.macrumors.com/article-new/2016/06/darkmodeconceptmail-800x554.jpg" alt="" width="800" height="554" class="aligncenter size-large wp-image-505573"><em><center>A dark mode concept from <a href="//www.macrumors.com/2016/06/06/ios-10-concept-dark-mode/">iHelpBR</a></center></em></li><br>
+                        <li><strong>Split Screen mode for iPhone</strong> - The option to <a href="//forums.macrumors.com/threads/ios-12-wishlist.2106430/page-3#post-25870446">run two apps</a> side by side on the iPhone would be useful on larger iPhones, especially with rumors pointing towards a 6.5-inch iPhone in 2018.</li><br>
+                        <li><strong>More customization</strong> - <em>MacRumors</em> reader <a href="//forums.macrumors.com/threads/what-do-you-want-to-see-in-ios-12.2119194/#post-26066444">Breezygirl</a> would like to see Apple add more Android-like customization options, such as the ability to change the background in messages, adjust the SMS bubble colors, or add a theme to the OS to shift the colors.</li><br>
+                        <li><strong>Desktop mode</strong> - On some Android devices, there's a feature where you can dock a smartphone to use it as a desktop machine replacement, attaching it to a larger display, a keyboard, and a mouse. It's a long shot, but <em>MacRumors</em> reader <a href="//forums.macrumors.com/threads/ios-12-wishlist.2106430/page-4#post-26052775">Marrakas</a> would like to see Apple implement similar functionality.</li><br>
+                        <li><strong>Volume redesign</strong> - The design of the indicator when you adjust the volume on the iPhone has always been a point of contention with iOS users, and so it's no surprise that in iOS 12, <em>MacRumors</em> readers are hoping for a new, less intrusive volume interface that takes up less screen space. <br><br><img src="//cdn.macrumors.com/article-new/2018/05/iphonevolumecontrol.jpg" alt="" width="600" height="335" class="aligncenter size-full wp-image-637543"></li><br>
+                        <li><strong>Improved battery widget</strong> - The battery widget <a href="//forums.macrumors.com/threads/ios-12-wishlist.2106430/page-2#post-25860299">could be improved</a> by allowing all of a user's devices to be displayed for quick cross-device battery checks.</li><br>
+                        <li><strong>No more shake to undo</strong> - Several <em>MacRumors</em> readers <a href="//forums.macrumors.com/threads/ios-12-wishlist.2106430/page-4#post-26055789">are tired</a> of the shake to undo/redo feature in the iPhone, which can be activated accidentally. Some readers would like to see an undo feature enabled through a different gesture.</li>
+                        </ul>
+
+                        <br>
+                        <h2>App Improvements</h2>
+                        <br>
+                        <ul>
+                        <li><strong>Camera controls in the Camera app</strong> - On a lot of Android devices, the camera app provides manual controls for photo taking. Apple has no similar feature for full manual control, and it would be nice if it were an option, even one that had to be toggled on in Settings. Other settings are hidden in the Settings app, and users would like to see these more readily accessible.</li><br>
+                        <li><strong>Aspect Ratio in Camera app</strong> - Multiple <em>MacRumors</em> <a href="//forums.macrumors.com/threads/ios-12-wishlist.2106430/page-5#post-26066726">readers</a> would like to see an option to set a default aspect ratio for photos.</li><br>
+                        <li><strong>FaceTime</strong> - Several <em>MacRumors</em> readers are hoping for group FaceTime. Rumors suggest Apple's working on it, but it might not come in iOS 12. Animoji are expected to come to FaceTime, though, so you can converse with friends and family as an Animoji character. <br><br><img src="//cdn.macrumors.com/article-new/2017/01/facetime-800x462.jpg" alt="" width="800" height="462" class="aligncenter size-large wp-image-544646"></li><br>
+                        <li><strong>App Store wishlists</strong> - The revamped App Store in iOS 11 removed app wishlists that some users took advantage of often. This is a feature that quite a few people miss.</li><br>
+                        <li><strong>Photos improvements</strong> - <em>MacRumors</em> reader <a href="//forums.macrumors.com/threads/ios-12-wishlist.2106430/#post-25822287">kirky29</a> is hoping for a major overhaul to the Photos app with a lot more functionality for doing things like viewing and editing metadata, changing grid size, altering the order of the photos, and more.</li><br>
+                        <li><strong>Music app overhaul</strong> - <em>MacRumors</em> reader <a href="//forums.macrumors.com/threads/what-do-you-want-to-see-in-ios-12.2119194/#post-26066556">GermanSuplex</a> has several suggestions for ways Apple could improve the Music app, including the ability to turn iCloud purchases off if desired, improved playcount syncing across devices, the ability to sort songs within playlists by different parameters, refinements and improvements to cloud services and the way the app handles metadata, more control over which devices playlists sync to, and better syncing of music content in general.</li><br>
+                        <li><strong>Messages search and archive</strong> - A more robust search feature for the Messages app would be a welcome change, as would an option to archive messages and snooze messages, as Joseph H <a href="//forums.macrumors.com/threads/ios-12-wishlist.2106430/page-5#post-26066726">points out</a>.</li>
+                        </ul>
+
+                        <br>
+                        <h2>iPad</h2>
+                        <br>
+                        <ul>
+                        <li><strong>Mouse support on iPad</strong> - This one is a long shot, but <em>MacRumors</em> reader <a href="//forums.macrumors.com/threads/ios-12-wishlist.2106430/#post-25823203">boston04and07</a> wants to see Apple add mouse support for the iPad for navigating through apps.</li><br>
+                        <li><strong>iPhone apps for iPad</strong> - Multiple iPhone apps, including Weather, Calculator, Health, and Activity are missing from the iPad and have been exclusive to the iPhone for years.</li>
+                        </ul>
+
+                        <br>
+                        <h2>Settings and Systemwide Features</h2>
+                        <br>
+                        <ul>
+                        <li><strong>Revamped Wi-Fi and Bluetooth Toggles</strong> - With iOS 11, Apple changed the functionality of the Wi-Fi and Bluetooth toggles in the Control Center. These buttons no longer permanently turn off Wi-Fi and Bluetooth, and instead just disable the features for a set amount of time. In iOS 12, <em>MacRumors</em> readers would like to see the on/off functionality returned or enabled through <a href="//forums.macrumors.com/threads/ios-12-wishlist.2106430/#post-25823646">another gesture</a>, such as a longer press. <br><br><img src="//cdn.macrumors.com/article-new/2017/11/controlcenterwifitoggles-800x707.jpg" alt="" width="800" height="707" class="aligncenter size-large wp-image-603630"></li><br>
+                        <li><strong>Do Not Disturb improvements</strong> - Do Not Disturb functionality on the iPhone is fairly basic, and that is actually one of the features Apple's rumored to be working on for iOS 12. The ability to toggle DND on and off for specific apps would be useful, as <a href="//forums.macrumors.com/threads/ios-12-wishlist.2106430/#post-25823203">boston04and07</a> points out, and being able to set schedules for different days of the week would <a href="//forums.macrumors.com/threads/ios-12-wishlist.2106430/page-2#post-25829185">also be useful</a>. An option to <a href="//forums.macrumors.com/threads/ios-12-wishlist.2106430/page-5#post-26066726">hide notifications entirely</a> would be a welcome change for those who want to use their devices in peace. </li><br>
+                        <li><strong>Biometric locking for specific apps</strong> - Third-party apps can require you to use a fingerprint, Face ID, or a password to access sensitive data, but as <em>MacRumors</em> reader <a href="//forums.macrumors.com/threads/ios-12-wishlist.2106430/#post-25824591">TimFL1</a> says, this isn't available for first-party apps like Photos, nor for specific parts of apps, like individual photo albums.</li><br>
+                        <li><strong>iCloud notifications</strong> - If you have multiple devices and get a notification from an app like Apple News, it goes to all of your devices instead of just one, and viewing the notification on just one device doesn't clear it from all of them. If Apple <a href="//forums.macrumors.com/threads/ios-12-wishlist.2106430/page-2#post-25827281">implemented iCloud notifications</a>, notifications would work more smoothly across devices, appearing on just one device and clearing on all.</li>
+                        </ul>
+
+                        <br>
+                        <h2>iPhone X</h2>
+                        <br>
+                        <ul>
+                        <li><strong>Always-on display for iPhone X</strong> - Some Android smartphones offer an always-on display, something that Apple could perhaps theoretically enable thanks to the OLED display on the iPhone X, which eats up less battery life. <em>MacRumors</em> readers would like to see <a href="//forums.macrumors.com/threads/ios-12-wishlist.2106430/page-3#post-25906684">an always-on display</a> on the iPhone X for things like the time and incoming notifications, even though it's probably a long shot at this point in time.</li>
+                        </ul>
+
+                        <br>
+                        <h2>AI</h2>
+                        <br>
+                        <ul>
+                        <li><strong>Siri</strong> - Improvements to Siri was one of the most frequent requests, with specifics that include Spotify integration, multi-lingual query support, and, in general, just features to make Siri smarter and more like Alexa or Google Assistant.</li>
+                        </ul>
+                        More than anything, most of our readers are hoping that Apple is going to hunker down and focus on bug fixes and performance improvements to make existing features operate smoothly and without issues.
+                        <br>
+
+                        <br>
+                        Apple is said to be planning to address stability and performance concerns in this update, and has gone as far as delaying planned features in favor of underlying fixes.
+                        <br>
+
+                        <br>
+                        Do you have other features you're hoping to see in iOS 12 that didn't make our list? Let us know in the comments.<br><br><div class="linkback">Related Roundup: <a href="//www.macrumors.com/roundup/ios-12/">iOS 12</a></div></div>
                         """
 
+            var newRanges = ["fewswfe".ranges(of: "ew").first]
+            newRanges.remove(at: 0)
+            
+            var j = [Int]()
+            
             let imgs = string.ranges(of: "<img(.*?)>", options: .regularExpression).map{string[$0]}
             var imgRange = "fewswfe".ranges(of: "ew").first
             var newRange = "fewswfe".ranges(of: "ew").first
-            for img in imgs.reversed() {
+            for (i, img) in imgs.reversed().enumerated() {
                 //imgArray.append(String(img))
                 //let iframeView = IframeWebView(frame: CGRect(x: 20, y: 20, width: 100, height: 70))
                 //iframeView.loadIframeString(iframe: String(iframe))
@@ -265,8 +348,11 @@ Have you checked out Google News? Do you prefer it over Apple's own news app? Le
                 //let attributedString = NSAttributedString(attachment: subviewTextAttachment)
                 imgRange = img.startIndex..<img.endIndex
                 //mutableAttributedString.replaceCharacters(in: NSRange(imgRange, in: string), with: attributedString)
-                string.replaceSubrange(imgRange!, with: "zxcv1")
-                newRange = string.range(of: "zxcv1")
+                string.replaceSubrange(imgRange!, with: "zxcv"+String(i))
+                newRange = string.range(of: "zxcv"+String(i))
+                
+                newRanges.append(newRange)
+                j.append(i)
             }
             
             let data = string.data(using: .utf8)
@@ -274,10 +360,14 @@ Have you checked out Google News? Do you prefer it over Apple's own news app? Le
             var muteAttString = NSMutableAttributedString(attributedString: attrString!)
             //var imgArray = [String]()
             
-            let textAttachment = NSTextAttachment()
-            textAttachment.image = UIImage(named: "articleSampleImage.png")
-            var attrStringWithImage = NSAttributedString(attachment: textAttachment)
-            muteAttString.replaceCharacters(in: NSRange(newRange!, in: string), with: attrStringWithImage)
+            for (i, jz) in j.enumerated() {
+                let textAttachment = NSTextAttachment()
+                textAttachment.image = UIImage(named: "articleSampleImage.png")
+                var attrStringWithImage = NSAttributedString(attachment: textAttachment)
+                
+                let z = string.range(of: "zxcv"+String(jz))
+                muteAttString.replaceCharacters(in: NSRange(z!, in: string), with: attrStringWithImage)
+            }
             
             bodyContent.attributedText = muteAttString
             
