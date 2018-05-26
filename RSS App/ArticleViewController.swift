@@ -9,13 +9,11 @@
 import UIKit
 import WebKit
 import SafariServices
-//import ContentFittingWebView
 import SwiftSoup
 import Foundation
 import FeedKit
 import DateToolsSwift
 import SubviewAttachingTextView
-import Atributika
 import DTCoreText
 
 class ArticleViewController: UIViewController, UITextViewDelegate, WKUIDelegate, WKNavigationDelegate, DTAttributedTextContentViewDelegate, DTLazyImageViewDelegate {

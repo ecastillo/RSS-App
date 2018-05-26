@@ -1,6 +1,4 @@
 PODS:
-  - Atributika (4.4.2)
-  - ContentFittingWebView (1.0.1)
   - DateToolsSwift (4.0.0)
   - DTCoreText (1.6.21):
     - DTCoreText/Core (= 1.6.21)
@@ -27,8 +25,6 @@ PODS:
   - SwiftSoup (1.7.1)
 
 DEPENDENCIES:
-  - Atributika
-  - ContentFittingWebView (~> 1.0.0)
   - DateToolsSwift
   - DTCoreText
   - FeedKit
@@ -38,8 +34,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
-    - Atributika
-    - ContentFittingWebView
     - DateToolsSwift
     - DTCoreText
     - DTFoundation
@@ -49,8 +43,6 @@ SPEC REPOS:
     - SwiftSoup
 
 SPEC CHECKSUMS:
-  Atributika: 61cf7794646bd033cd19aad1b8f7e1cae8daa877
-  ContentFittingWebView: 57ef573f1604427fa55ed7404400f13ad9232956
   DateToolsSwift: 875d97ff9e3a5d54abdd67a269b3f51c757b71ab
   DTCoreText: e5d688cffc9f6a61eddd1a4f94e2046851230de3
   DTFoundation: f03be9fd786f11e505bb8fc44e2a3732bf0917df
@@ -59,6 +51,6 @@ SPEC CHECKSUMS:
   SubviewAttachingTextView: 27a6ae7bde3b891b15d85ea2aee4b6d635b34a32
   SwiftSoup: 277f7ef548826e0ca7603a06b30d4a5df3ee0587
 
-PODFILE CHECKSUM: ba54fb23a062d443955badad3436c4f10a91e30d
+PODFILE CHECKSUM: a31dc075c39fcee6169ec1b1dd5605f68c06622c
 
 COCOAPODS: 1.5.0

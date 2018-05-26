@@ -21,7 +21,7 @@
 		07EEFD2420AA630C00715920 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07EEFD2220AA630C00715920 /* LaunchScreen.storyboard */; };
 		07EEFD2C20AA671F00715920 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EEFD2B20AA671F00715920 /* ArticleViewController.swift */; };
 		07EEFD2E20AA67E400715920 /* articleSampleImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 07EEFD2D20AA67E400715920 /* articleSampleImage.png */; };
-		46FA961D807D4AD4E1A7D33C /* Pods_RSS_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C3C86D98D7AE9404108899 /* Pods_RSS_App.framework */; };
+		A369816DBB7DA0C01B082262 /* Pods_RSS_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ADCCF2014DECBAA75B13B88 /* Pods_RSS_App.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,9 +41,9 @@
 		07EEFD2520AA630C00715920 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		07EEFD2B20AA671F00715920 /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 		07EEFD2D20AA67E400715920 /* articleSampleImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = articleSampleImage.png; sourceTree = "<group>"; };
-		7AB73A45282EA526589C1CF6 /* Pods-RSS App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSS App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RSS App/Pods-RSS App.debug.xcconfig"; sourceTree = "<group>"; };
-		A0753056C0DED93F3BFE725E /* Pods-RSS App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSS App.release.xcconfig"; path = "Pods/Target Support Files/Pods-RSS App/Pods-RSS App.release.xcconfig"; sourceTree = "<group>"; };
-		E1C3C86D98D7AE9404108899 /* Pods_RSS_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RSS_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		146963F0C82C1C8B6C8FD825 /* Pods-RSS App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSS App.release.xcconfig"; path = "Pods/Target Support Files/Pods-RSS App/Pods-RSS App.release.xcconfig"; sourceTree = "<group>"; };
+		1919FF4E99D4CBD0641C19E7 /* Pods-RSS App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSS App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RSS App/Pods-RSS App.debug.xcconfig"; sourceTree = "<group>"; };
+		3ADCCF2014DECBAA75B13B88 /* Pods_RSS_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RSS_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46FA961D807D4AD4E1A7D33C /* Pods_RSS_App.framework in Frameworks */,
+				A369816DBB7DA0C01B082262 /* Pods_RSS_App.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,8 +63,8 @@
 			children = (
 				07EEFD1820AA630B00715920 /* RSS App */,
 				07EEFD1720AA630B00715920 /* Products */,
-				1535323B840EC4140D3EEFBB /* Pods */,
-				26C698B0FF0E77F6F13EF066 /* Frameworks */,
+				114EB10B94647B32E4309F99 /* Pods */,
+				621FF7CDE7BC0F84D5AE5B95 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,19 +98,19 @@
 			path = "RSS App";
 			sourceTree = "<group>";
 		};
-		1535323B840EC4140D3EEFBB /* Pods */ = {
+		114EB10B94647B32E4309F99 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7AB73A45282EA526589C1CF6 /* Pods-RSS App.debug.xcconfig */,
-				A0753056C0DED93F3BFE725E /* Pods-RSS App.release.xcconfig */,
+				1919FF4E99D4CBD0641C19E7 /* Pods-RSS App.debug.xcconfig */,
+				146963F0C82C1C8B6C8FD825 /* Pods-RSS App.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		26C698B0FF0E77F6F13EF066 /* Frameworks */ = {
+		621FF7CDE7BC0F84D5AE5B95 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E1C3C86D98D7AE9404108899 /* Pods_RSS_App.framework */,
+				3ADCCF2014DECBAA75B13B88 /* Pods_RSS_App.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -122,11 +122,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 07EEFD2820AA630C00715920 /* Build configuration list for PBXNativeTarget "RSS App" */;
 			buildPhases = (
-				E33B326A4E32FF82735A43F1 /* [CP] Check Pods Manifest.lock */,
+				36947B6574F8F24AD104C42B /* [CP] Check Pods Manifest.lock */,
 				07EEFD1220AA630B00715920 /* Sources */,
 				07EEFD1320AA630B00715920 /* Frameworks */,
 				07EEFD1420AA630B00715920 /* Resources */,
-				C9636ADBB01E5AE95AD5852D /* [CP] Embed Pods Frameworks */,
+				5BEFE9C285CF7831124EEBDE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -188,41 +188,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		C9636ADBB01E5AE95AD5852D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-RSS App/Pods-RSS App-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
-				"${BUILT_PRODUCTS_DIR}/ContentFittingWebView/ContentFittingWebView.framework",
-				"${BUILT_PRODUCTS_DIR}/DTCoreText/DTCoreText.framework",
-				"${BUILT_PRODUCTS_DIR}/DTFoundation/DTFoundation.framework",
-				"${BUILT_PRODUCTS_DIR}/DateToolsSwift/DateToolsSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/FeedKit/FeedKit.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SubviewAttachingTextView/SubviewAttachingTextView.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftSoup/SwiftSoup.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ContentFittingWebView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTCoreText.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTFoundation.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateToolsSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FeedKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SubviewAttachingTextView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSoup.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RSS App/Pods-RSS App-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E33B326A4E32FF82735A43F1 /* [CP] Check Pods Manifest.lock */ = {
+		36947B6574F8F24AD104C42B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -238,6 +204,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5BEFE9C285CF7831124EEBDE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-RSS App/Pods-RSS App-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/DTCoreText/DTCoreText.framework",
+				"${BUILT_PRODUCTS_DIR}/DTFoundation/DTFoundation.framework",
+				"${BUILT_PRODUCTS_DIR}/DateToolsSwift/DateToolsSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/FeedKit/FeedKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SubviewAttachingTextView/SubviewAttachingTextView.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftSoup/SwiftSoup.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTCoreText.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTFoundation.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateToolsSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FeedKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SubviewAttachingTextView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSoup.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RSS App/Pods-RSS App-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -395,7 +391,7 @@
 		};
 		07EEFD2920AA630C00715920 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7AB73A45282EA526589C1CF6 /* Pods-RSS App.debug.xcconfig */;
+			baseConfigurationReference = 1919FF4E99D4CBD0641C19E7 /* Pods-RSS App.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -412,7 +408,7 @@
 		};
 		07EEFD2A20AA630C00715920 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A0753056C0DED93F3BFE725E /* Pods-RSS App.release.xcconfig */;
+			baseConfigurationReference = 146963F0C82C1C8B6C8FD825 /* Pods-RSS App.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
