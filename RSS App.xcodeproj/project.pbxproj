@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		075B1BE120B8C38100511DD3 /* ArticleAttributedTextContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075B1BE020B8C38100511DD3 /* ArticleAttributedTextContentView.swift */; };
 		075B1BE320B8FE8A00511DD3 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 075B1BE220B8FE8900511DD3 /* style.css */; };
+		075B1BE520B9A44600511DD3 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075B1BE420B9A44600511DD3 /* Article.swift */; };
 		07B4563B20B079D8000220FB /* IframeWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B4563A20B079D8000220FB /* IframeWebView.swift */; };
 		07B4563D20B0EBE7000220FB /* testViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B4563C20B0EBE7000220FB /* testViewController.swift */; };
 		07BB555120B22B1C006F7E2D /* ArticleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BB554F20B22B1C006F7E2D /* ArticleCollectionViewCell.swift */; };
@@ -26,6 +27,7 @@
 /* Begin PBXFileReference section */
 		075B1BE020B8C38100511DD3 /* ArticleAttributedTextContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleAttributedTextContentView.swift; sourceTree = "<group>"; };
 		075B1BE220B8FE8900511DD3 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
+		075B1BE420B9A44600511DD3 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		07B4563A20B079D8000220FB /* IframeWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IframeWebView.swift; sourceTree = "<group>"; };
 		07B4563C20B0EBE7000220FB /* testViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testViewController.swift; sourceTree = "<group>"; };
 		07BB554F20B22B1C006F7E2D /* ArticleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				07EEFD1920AA630B00715920 /* AppDelegate.swift */,
 				07EEFD1B20AA630B00715920 /* NewsListViewController.swift */,
 				07EEFD2B20AA671F00715920 /* ArticleViewController.swift */,
+				075B1BE420B9A44600511DD3 /* Article.swift */,
 				07B4563A20B079D8000220FB /* IframeWebView.swift */,
 				07EEFD1D20AA630B00715920 /* Main.storyboard */,
 				075B1BE020B8C38100511DD3 /* ArticleAttributedTextContentView.swift */,
@@ -248,6 +251,7 @@
 				07EEFD2C20AA671F00715920 /* ArticleViewController.swift in Sources */,
 				07EEFD1A20AA630B00715920 /* AppDelegate.swift in Sources */,
 				075B1BE120B8C38100511DD3 /* ArticleAttributedTextContentView.swift in Sources */,
+				075B1BE520B9A44600511DD3 /* Article.swift in Sources */,
 				07BB555120B22B1C006F7E2D /* ArticleCollectionViewCell.swift in Sources */,
 				07B4563D20B0EBE7000220FB /* testViewController.swift in Sources */,
 				07B4563B20B079D8000220FB /* IframeWebView.swift in Sources */,

@@ -27,11 +27,6 @@ class ArticleViewController: UIViewController, UITextViewDelegate, WKUIDelegate,
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var bodyContent: ArticleAttributedTextContentView!
     
-    
-    
-    
-    var articleSubviews = [UIView]()
-    
     var article: RSSFeedItem?
     
     var articleContent = """
@@ -40,7 +35,7 @@ class ArticleViewController: UIViewController, UITextViewDelegate, WKUIDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         articleTitle.text = article?.title
         
         if let link = article?.link {
@@ -65,10 +60,6 @@ class ArticleViewController: UIViewController, UITextViewDelegate, WKUIDelegate,
         } catch {
             print("error")
         }
-
-        //560x315
-        //337x190
-        
         
         test()
     }
@@ -138,7 +129,7 @@ class ArticleViewController: UIViewController, UITextViewDelegate, WKUIDelegate,
             let defaultStyleSheet = DTCSSStylesheet(styleBlock: "br{display: none}")
             let defaultFontFamily = UIFont.systemFont(ofSize: 16).familyName
             let attrString = NSAttributedString(htmlData: data, options:[DTUseiOS6Attributes: true, DTDefaultStyleSheet: defaultStyleSheet, DTDefaultFontFamily: defaultFontFamily, DTDefaultFontSize: 16, DTDefaultLineHeightMultiplier: 1.4], documentAttributes:nil)
-            var muteAttString = NSMutableAttributedString(attributedString: attrString!)
+            let muteAttString = NSMutableAttributedString(attributedString: attrString!)
 
             bodyContent.shouldDrawImages = false
             bodyContent.delegate = self
@@ -147,11 +138,6 @@ class ArticleViewController: UIViewController, UITextViewDelegate, WKUIDelegate,
         }
     }
     
-//    override func viewDidLayoutSubviews() {
-//        bodyContent.frame = CGRect(x: bodyContent.frame.origin.x, y: bodyContent.frame.origin.y, width: bodyContent.frame.width, height: bodyContent.attributedTextContentView.frame.height)
-//        bodyContent.backgroundColor = UIColor.red
-//        bodyContent.attributedTextContentView.backgroundColor = UIColor.blue
-//    }
     
     
     func attributedTextContentView(_ attributedTextContentView: DTAttributedTextContentView!, viewFor attachment: DTTextAttachment!, frame: CGRect) -> UIView! {
@@ -185,29 +171,24 @@ class ArticleViewController: UIViewController, UITextViewDelegate, WKUIDelegate,
     
     func lazyImageView(_ lazyImageView: DTLazyImageView!, didChangeImageSize size: CGSize) {
         print(bodyContent.frame.width)
-        //lazyImageView.contentMode = .scaleAspectFill
-        //lazyImageView.clipsToBounds = true
         lazyImageView.backgroundColor = UIColor.red
-        
         let url = lazyImageView.url
-        
         let pred = NSPredicate(format: "contentURL == %@", url! as CVarArg)
-        
         var didUpdate = false
         
         // update all attachments that match this URL (possibly multiple images with same size)
-        for oneAttachment in bodyContent.layoutFrame.textAttachments(with: pred) {
+        for case let oneAttachment as DTTextAttachment in bodyContent.layoutFrame.textAttachments(with: pred) {
             // update attachments that have no original size, that also sets the display size
-            print((oneAttachment as! DTTextAttachment).contentURL)
-            if (oneAttachment as! DTTextAttachment).originalSize == CGSize.zero {
+            print(oneAttachment.contentURL)
+            if oneAttachment.originalSize == CGSize.zero {
                 print("equal to zero")
-                (oneAttachment as! DTTextAttachment).originalSize = CGSize(width: bodyContent.frame.width, height: 10) //imageSize
+                oneAttachment.originalSize = CGSize(width: bodyContent.frame.width, height: 10) //imageSize
                 didUpdate = true
             } else {
                 print("not equal to zero")
                 //(oneAttachment as! DTTextAttachment).originalSize = size
                 let aspectRatio = size.width / size.height
-                (oneAttachment as! DTTextAttachment).displaySize = CGSize(width: bodyContent.frame.width, height: bodyContent.frame.width / aspectRatio) //imageSize
+                oneAttachment.displaySize = CGSize(width: bodyContent.frame.width, height: bodyContent.frame.width / aspectRatio) //imageSize
                 didUpdate = true
             }
         }
@@ -232,61 +213,8 @@ class ArticleViewController: UIViewController, UITextViewDelegate, WKUIDelegate,
         print("view did layout subviews")
         
         //bodyContent.layouter = nil
-        
         //bodyContent.relayoutText()
     }
-    
-    
-    
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        //print("view wil transition!")
-        
-//        var didUpdate = false
-//        self.bodyContent.attributedString.enumerateAttribute(NSAttributedStringKey.attachment, in: NSMakeRange(0, self.bodyContent.attributedString.length), options: .reverse) { (attachment, range, idk) in
-//            if attachment is DTImageTextAttachment {
-//                print("safe area width: \(self.view.safeAreaLayoutGuide.layoutFrame.size.height)")
-//                print("should update image to width of: \(size.width - (19*2))")
-//                let aspectRatio = (attachment as! DTTextAttachment).originalSize.width / (attachment as! DTTextAttachment).originalSize.height
-//                (attachment as! DTTextAttachment).displaySize = CGSize(width: size.width - (19*2), height: size.width / aspectRatio)
-//                didUpdate = true
-//            }
-//        }
-//        if didUpdate {
-//            // layout might have changed due to image sizes
-//            // do it on next run loop because a layout pass might be going on
-//            DispatchQueue.main.async {
-//                self.bodyContent.layouter = nil // Needed to display image size correctly
-//                self.bodyContent.relayoutText()
-//            }
-//        }
-        
-        coordinator.animate(alongsideTransition: nil, completion: {
-            _ in 
-            
-//            var didUpdate = false
-//            self.bodyContent.attributedString.enumerateAttribute(NSAttributedStringKey.attachment, in: NSMakeRange(0, self.bodyContent.attributedString.length), options: .reverse) { (attachment, range, idk) in
-//                if attachment is DTImageTextAttachment {
-//                    print("should update image to width of: \(size.width)")
-//                    let aspectRatio = (attachment as! DTTextAttachment).originalSize.width / (attachment as! DTTextAttachment).originalSize.height
-//                    (attachment as! DTTextAttachment).displaySize = CGSize(width: self.bodyContent.frame.width, height: self.bodyContent.frame.width / aspectRatio)
-//                    didUpdate = true
-//                }
-//            }
-//            if didUpdate {
-//                // layout might have changed due to image sizes
-//                // do it on next run loop because a layout pass might be going on
-//                DispatchQueue.main.async {
-//                    self.bodyContent.layouter = nil // Needed to display image size correctly
-//                    self.bodyContent.relayoutText()
-//                }
-//            }
-        })
-        
-    }
-
-    
 
 }
 
@@ -302,6 +230,8 @@ extension String {
         }
     }
 }
+
+
 
 extension UIImage {
     func resizeImage(scale: CGFloat) -> UIImage {
@@ -324,50 +254,6 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return newImage!
     }
-}
-
-
-
-
-struct ArticleSection {
-    var type: ArticleSectionType
-    var html: String
-    
-    enum ArticleSectionType {
-        case text
-        case iframe
-    }
-}
-
-
-
-
-func splitArticleIntoSections(html: String) -> [ArticleSection] {
-    let iframes = html.ranges(of: "<iframe(.*?)</iframe>", options: .regularExpression).map{html[$0] }
-    
-    var sections = [ArticleSection]()
-    var index = html.startIndex
-    for iframe in iframes {
-        let range = index..<iframe.startIndex
-        let text = String(html[range])
-        if !text.isEmpty {
-            let textSection = ArticleSection(type: .text, html: text)
-            sections.append(textSection)
-        }
-        
-        let iframeSection = ArticleSection(type: .iframe, html: String(iframe))
-        sections.append(iframeSection)
-        
-        index = iframe.endIndex
-    }
-    let range = index..<html.endIndex
-    let text = String(html[range])
-    if !text.isEmpty {
-        let textSection = ArticleSection(type: .text, html: text)
-        sections.append(textSection)
-    }
-    
-    return sections
 }
 
 

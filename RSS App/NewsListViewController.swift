@@ -27,41 +27,6 @@ class NewsListViewController: UIViewController, UICollectionViewDelegate, UIColl
         articleCollectionView.register(UINib(nibName: "ArticleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "articleCell")
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return articlesArray.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "articleCell", for: indexPath) as! ArticleCollectionViewCell
-        
-        let selectedArticle = articlesArray[indexPath.row]
-        cell.title.text = selectedArticle.title
-        cell.date.text = selectedArticle.pubDate?.timeAgoSinceNow
-        
-        do {
-            //if(Int((imgz?.size.width)!) > 200) {
-            let articleImageURL = articleImageURLs[indexPath.row]
-            cell.image.sd_setImage(with: articleImageURL, placeholderImage: nil)
-        } catch Exception.Error(let type, let message) {
-            print(message)
-        } catch {
-            print("error")
-        }
-        
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "goToArticle", sender: self)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! ArticleViewController
-        if let indexPath = articleCollectionView.indexPathsForSelectedItems {
-            destinationVC.article = articlesArray[indexPath[0].row]
-        }
-    }
-    
     func loadArticles() {
         let feedURL = URL(string: self.feedURL)!
         if let parser = FeedParser(URL: feedURL) { // or FeedParser(data: data)
@@ -97,6 +62,54 @@ class NewsListViewController: UIViewController, UICollectionViewDelegate, UIColl
             }
         } else {
             print("error parsing feed URL")
+        }
+    }
+    
+    
+    
+    //MARK: - CollectionView Datasource Methods
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return articlesArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "articleCell", for: indexPath) as! ArticleCollectionViewCell
+        
+        let selectedArticle = articlesArray[indexPath.row]
+        cell.title.text = selectedArticle.title
+        cell.date.text = selectedArticle.pubDate?.timeAgoSinceNow
+        
+        do {
+            //if(Int((imgz?.size.width)!) > 200) {
+            let articleImageURL = articleImageURLs[indexPath.row]
+            cell.image.sd_setImage(with: articleImageURL, placeholderImage: nil)
+        } catch Exception.Error(let type, let message) {
+            print(message)
+        } catch {
+            print("error")
+        }
+        
+        return cell
+    }
+    
+    
+    
+    // MARK: - CollectionView Delegate methods
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "goToArticle", sender: self)
+    }
+    
+    
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! ArticleViewController
+        if let indexPath = articleCollectionView.indexPathsForSelectedItems {
+            destinationVC.article = articlesArray[indexPath[0].row]
+            //destinationVC.featuredImage.image =
         }
     }
 
