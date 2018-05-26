@@ -78,7 +78,7 @@
                                 <rect key="frame" x="0.0" y="116" width="375" height="502"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dgk-sr-a0e" userLabel="Content">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="643.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="506"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="articleSampleImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="S9i-JC-aaa">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
@@ -105,38 +105,29 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0gP-yj-yNz" customClass="VVSubviewAttachingTextView">
-                                                <rect key="frame" x="19" y="314" width="337" height="200"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <attributedString key="attributedText">
-                                                    <fragment>
-                                                        <string key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                        <attributes>
-                                                            <font key="NSFont" metaFont="system" size="14"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                                            </textView>
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xcl-0l-Ogp" customClass="ArticleAttributedTextContentView" customModule="RSS_App" customModuleProvider="target">
+                                                <rect key="frame" x="19" y="315" width="337" height="172"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="172" placeholder="YES" id="Bvd-kT-53J"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="0gP-yj-yNz" firstAttribute="top" secondItem="jqs-xh-bMA" secondAttribute="bottom" constant="7.5" id="3Dp-qE-JUT"/>
-                                            <constraint firstAttribute="bottom" secondItem="0gP-yj-yNz" secondAttribute="bottom" constant="129.5" id="AT0-K2-MoE"/>
                                             <constraint firstAttribute="trailing" secondItem="XZl-Kl-Qsh" secondAttribute="trailing" constant="19" id="Diu-B3-FdG"/>
                                             <constraint firstItem="jqs-xh-bMA" firstAttribute="top" secondItem="XZl-Kl-Qsh" secondAttribute="bottom" id="Dwq-ln-9xX"/>
                                             <constraint firstItem="XZl-Kl-Qsh" firstAttribute="leading" secondItem="Dgk-sr-a0e" secondAttribute="leading" constant="19" id="Erj-pH-VaD"/>
                                             <constraint firstItem="WCy-SL-Xvb" firstAttribute="top" secondItem="XZl-Kl-Qsh" secondAttribute="bottom" id="Fbf-2E-EPs"/>
                                             <constraint firstItem="XZl-Kl-Qsh" firstAttribute="top" secondItem="S9i-JC-aaa" secondAttribute="bottom" constant="18" id="Iim-eK-8Kt"/>
+                                            <constraint firstAttribute="trailing" secondItem="xcl-0l-Ogp" secondAttribute="trailing" constant="19" id="L6s-Df-hXc"/>
                                             <constraint firstItem="jqs-xh-bMA" firstAttribute="leading" secondItem="Dgk-sr-a0e" secondAttribute="leading" constant="19" id="LAg-ed-nfS"/>
+                                            <constraint firstAttribute="bottom" secondItem="xcl-0l-Ogp" secondAttribute="bottom" constant="19" id="NsM-lW-qT5"/>
+                                            <constraint firstItem="xcl-0l-Ogp" firstAttribute="leading" secondItem="Dgk-sr-a0e" secondAttribute="leading" constant="19" id="UCD-Ft-bQH"/>
                                             <constraint firstItem="WCy-SL-Xvb" firstAttribute="leading" secondItem="jqs-xh-bMA" secondAttribute="trailing" constant="8" id="cZx-9t-lZb"/>
                                             <constraint firstItem="WCy-SL-Xvb" firstAttribute="height" secondItem="jqs-xh-bMA" secondAttribute="height" id="fLz-FM-6jC"/>
-                                            <constraint firstAttribute="trailing" secondItem="0gP-yj-yNz" secondAttribute="trailing" constant="19" id="fcY-03-Eak"/>
                                             <constraint firstItem="S9i-JC-aaa" firstAttribute="top" secondItem="Dgk-sr-a0e" secondAttribute="top" id="hdr-Bs-Bie"/>
+                                            <constraint firstItem="xcl-0l-Ogp" firstAttribute="top" secondItem="jqs-xh-bMA" secondAttribute="bottom" constant="8.5" id="jDO-ol-R1i"/>
                                             <constraint firstItem="S9i-JC-aaa" firstAttribute="leading" secondItem="Dgk-sr-a0e" secondAttribute="leading" id="oF3-vJ-3KN"/>
                                             <constraint firstAttribute="trailing" secondItem="S9i-JC-aaa" secondAttribute="trailing" id="ocd-mJ-chF"/>
-                                            <constraint firstItem="0gP-yj-yNz" firstAttribute="leading" secondItem="Dgk-sr-a0e" secondAttribute="leading" constant="19" id="qMw-Po-h1N"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -160,7 +151,7 @@
                     </view>
                     <connections>
                         <outlet property="articleTitle" destination="XZl-Kl-Qsh" id="KlW-aX-7cs"/>
-                        <outlet property="bodyContent" destination="0gP-yj-yNz" id="i3u-Mi-3E5"/>
+                        <outlet property="bodyContent" destination="xcl-0l-Ogp" id="Veg-v9-Jmq"/>
                         <outlet property="date" destination="WCy-SL-Xvb" id="XK0-Aq-Uvd"/>
                         <outlet property="featuredImage" destination="S9i-JC-aaa" id="pEu-of-s39"/>
                         <outlet property="scrollContent" destination="Dgk-sr-a0e" id="V4y-M5-vpU"/>
