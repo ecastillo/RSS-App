@@ -92,8 +92,11 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jqs-xh-bMA">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jqs-xh-bMA">
                                                 <rect key="frame" x="19" y="276.5" width="87" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="160" id="IK1-Lb-DPc"/>
+                                                </constraints>
                                                 <state key="normal" title="website.com"/>
                                                 <connections>
                                                     <action selector="websiteButtonTapped:" destination="e3V-0E-t90" eventType="touchUpInside" id="waT-gr-O3W"/>
