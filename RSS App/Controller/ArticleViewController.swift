@@ -16,7 +16,7 @@ import DateToolsSwift
 import SubviewAttachingTextView
 import DTCoreText
 
-class ArticleViewController: UIViewController, UITextViewDelegate, WKUIDelegate, WKNavigationDelegate, DTAttributedTextContentViewDelegate, DTLazyImageViewDelegate {
+class ArticleViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, DTAttributedTextContentViewDelegate, DTLazyImageViewDelegate {
 
     @IBOutlet weak var scrollContent: UIView!
     @IBOutlet weak var featuredImage: UIImageView!
@@ -25,7 +25,7 @@ class ArticleViewController: UIViewController, UITextViewDelegate, WKUIDelegate,
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var bodyContent: ArticleAttributedTextContentView!
     
-    var article: RSSFeedItem?
+    var article: Article!
     
     var articleContent = """
                         The Google News app is a reimagining and revamp to the existing Google Newsstand Play app that was previously available via the iOS App Store. It's been entirely overhauled though, with a simple, clean interface that's fairly similar to the look of Apple News with a dedicated navigation bar at the bottom.
@@ -34,54 +34,28 @@ class ArticleViewController: UIViewController, UITextViewDelegate, WKUIDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        articleTitle.text = article?.title
+        articleTitle.text = article.title
         
-        if let link = article?.link {
-            let url = URL(string: link)
-            let domain = url?.host?.replacingOccurrences(of: "^www\\.*", with: "", options: .regularExpression)
+        if let url = article.url {
+            let domain = url.host?.replacingOccurrences(of: "^www\\.*", with: "", options: .regularExpression)
             website.setTitle(domain, for: .normal)
         }
         
-        date.text = article?.pubDate?.timeAgoSinceNow
+        date.text = article.date?.timeAgoSinceNow
         
-        do {
-            let doc: Document = try SwiftSoup.parse(article!.description!)
-            let img: Element = try! doc.select("img").first()!
-            let imgSrc: String = try! img.attr("src")
-            //let data = try Data(contentsOf: URL(string: imgSrc)!)
-            //let imgz = UIImage(data: data)
-            //if(Int((imgz?.size.width)!) > 200) {
-                featuredImage.sd_setImage(with: URL(string: imgSrc), placeholderImage: nil)
-            //}
-        } catch Exception.Error(let type, let message) {
-            print(message)
-        } catch {
-            print("error")
-        }
+        featuredImage.sd_setImage(with: article.featuredImageURL, placeholderImage: nil)
         
         test()
     }
 
-
-    
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        print(URL)
-        let svc = SFSafariViewController(url: URL)
-        self.present(svc, animated: true, completion: nil)
-        return false
-    }
-    
-
-    
     
     @IBAction func websiteButtonTapped(_ sender: UIButton) {
-        let url = URL(string: (article?.link)!)
-        let svc = SFSafariViewController(url: url!)
+        let svc = SFSafariViewController(url: article.url!)
         self.present(svc, animated: true, completion: nil)
     }
     
     func test() {
-        if var html = article?.description {
+        if var html = article.content {
 
             var string = """
                         The Worldwide Developers Conference is just about a week and a half away, and while we've heard some rumors on what we might see in iOS 12 and macOS 10.14, watchOS 5, the next-generation software update for the Apple Watch, remains a total mystery.
@@ -137,6 +111,7 @@ class ArticleViewController: UIViewController, UITextViewDelegate, WKUIDelegate,
     }
     
     
+    //MARK: - Attachment views
     
     func attributedTextContentView(_ attributedTextContentView: DTAttributedTextContentView!, viewFor attachment: DTTextAttachment!, frame: CGRect) -> UIView! {
         if let imageAttachment = attachment as? DTImageTextAttachment {
@@ -165,7 +140,6 @@ class ArticleViewController: UIViewController, UITextViewDelegate, WKUIDelegate,
         
         return nil
     }
-    
     
     func lazyImageView(_ lazyImageView: DTLazyImageView!, didChangeImageSize size: CGSize) {
         print(bodyContent.frame.width)
@@ -200,6 +174,27 @@ class ArticleViewController: UIViewController, UITextViewDelegate, WKUIDelegate,
         }
     }
     
+    func attributedTextContentView(_ attributedTextContentView: DTAttributedTextContentView!, viewForLink url: URL!, identifier: String!, frame: CGRect) -> UIView! {
+        if !frame.height.isNaN {
+            let linkButton = DTLinkButton(frame: frame)
+            linkButton.url = url
+            linkButton.minimumHitSize = CGSize(width: 25, height: 25)
+            linkButton.addTarget(self, action: #selector(openLink(_:)), for: .touchUpInside)
+            return linkButton
+        }
+        
+        return nil
+    }
+    
+    @objc func openLink(_ sender: DTLinkButton) {
+        print(sender.url)
+        let svc = SFSafariViewController(url: sender.url)
+        self.present(svc, animated: true, completion: nil)
+    }
+    
+    
+    
+    
     override func viewWillLayoutSubviews() {
         print("view will layout subviews")
     
@@ -217,6 +212,7 @@ class ArticleViewController: UIViewController, UITextViewDelegate, WKUIDelegate,
 }
 
 
+//MARK: - Extensions
 
 extension String {
     func convertHtml() -> NSMutableAttributedString{

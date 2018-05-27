@@ -14,20 +14,21 @@ import SDWebImage
 class NewsListViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     var feedURL: String = "http://feeds.macrumors.com/MacRumors-All"
-    var articlesArray = [FeedKit.RSSFeedItem]()
-    var articleImageURLs = [URL]()
+    var articles = [Article]()
     
     @IBOutlet weak var articleCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadArticles()
+        articles = dummyArticles()
+        //loadArticles()
         
         articleCollectionView.register(UINib(nibName: "ArticleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "articleCell")
     }
     
     func loadArticles() {
+        
         let feedURL = URL(string: self.feedURL)!
         if let parser = FeedParser(URL: feedURL) { // or FeedParser(data: data)
             // Parse asynchronously, not to block the UI.
@@ -39,18 +40,9 @@ class NewsListViewController: UIViewController, UICollectionViewDelegate, UIColl
                     case let .atom(feed): break       // Atom Syndication Format Feed Model
                     case let .rss(feed):        // Really Simple Syndication Feed Model
                         print("rss obtained!")
-                        self.articlesArray = feed.items!
-                        do {
-                            for article in self.articlesArray {
-                                let doc: Document = try SwiftSoup.parse(article.description!)
-                                let img: Element = try! doc.select("img").first()!
-                                let imgSrc: String = try! img.attr("src")
-                                self.articleImageURLs.append(URL(string: imgSrc)!)
-                            }
-                        } catch Exception.Error(let type, let message) {
-                            print(message)
-                        } catch {
-                            print("error")
+                        for item in feed.items! {
+                            let article = Article(item: item)
+                            self.articles.append(article)
                         }
                         self.articleCollectionView.reloadData()
                     case let .json(feed):       // JSON Feed Model
@@ -63,6 +55,7 @@ class NewsListViewController: UIViewController, UICollectionViewDelegate, UIColl
         } else {
             print("error parsing feed URL")
         }
+        
     }
     
     
@@ -70,25 +63,17 @@ class NewsListViewController: UIViewController, UICollectionViewDelegate, UIColl
     //MARK: - CollectionView Datasource Methods
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return articlesArray.count
+        return articles.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "articleCell", for: indexPath) as! ArticleCollectionViewCell
         
-        let selectedArticle = articlesArray[indexPath.row]
+        let selectedArticle = articles[indexPath.row]
         cell.title.text = selectedArticle.title
-        cell.date.text = selectedArticle.pubDate?.timeAgoSinceNow
-        
-        do {
-            //if(Int((imgz?.size.width)!) > 200) {
-            let articleImageURL = articleImageURLs[indexPath.row]
-            cell.image.sd_setImage(with: articleImageURL, placeholderImage: nil)
-        } catch Exception.Error(let type, let message) {
-            print(message)
-        } catch {
-            print("error")
-        }
+        cell.date.text = selectedArticle.date?.timeAgoSinceNow
+        let articleImageURL = articles[indexPath.row].featuredImageURL
+        cell.image.sd_setImage(with: articleImageURL, placeholderImage: nil)
         
         return cell
     }
@@ -108,8 +93,7 @@ class NewsListViewController: UIViewController, UICollectionViewDelegate, UIColl
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! ArticleViewController
         if let indexPath = articleCollectionView.indexPathsForSelectedItems {
-            destinationVC.article = articlesArray[indexPath[0].row]
-            //destinationVC.featuredImage.image =
+            destinationVC.article = articles[indexPath[0].row]
         }
     }
 

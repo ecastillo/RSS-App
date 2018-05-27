@@ -28,4 +28,6 @@ class ArticleAttributedTextContentView: DTAttributedTextContentView {
         }
     }
     
+    
+    
 }
