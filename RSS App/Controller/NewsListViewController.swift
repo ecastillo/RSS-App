@@ -13,9 +13,8 @@ import SDWebImage
 
 class NewsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    var feeds = [String]()
+    var feeds = [Feed]()
     //var feedURL: String =  "http://eflorenzano.com/atom.xml" //"http://brack3t.com/feeds/all.atom.xml" //"http://feeds.macrumors.com/MacRumors-All" //"https://refind.com/chrismessina.json"
-    var articles = [[Article]]()
     var selectedArticle: Article?
     
     @IBOutlet weak var feedsTableView: UITableView!
@@ -23,12 +22,12 @@ class NewsListViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        feeds.append("http://feeds.macrumors.com/MacRumors-All")
-        articles.append([Article]())
-        feeds.append("http://brack3t.com/feeds/all.atom.xml")
-        articles.append([Article]())
-        feeds.append("http://eflorenzano.com/atom.xml")
-        articles.append([Article]())
+        let feed1 = Feed(feedURL: URL(string: "http://feeds.macrumors.com/MacRumors-All")!)
+        feeds.append(feed1)
+        let feed2 = Feed(feedURL: URL(string: "http://brack3t.com/feeds/all.atom.xml")!)
+        feeds.append(feed2)
+        let feed3 = Feed(feedURL: URL(string: "http://eflorenzano.com/atom.xml")!)
+        feeds.append(feed3)
         
         feedsTableView.delegate = self
         feedsTableView.dataSource = self
@@ -39,9 +38,8 @@ class NewsListViewController: UIViewController, UITableViewDelegate, UITableView
     
     func loadArticles() {
         
-        for (i, feed) in feeds.enumerated() {
-            let feedURL = URL(string: feed)!
-            if let parser = FeedParser(URL: feedURL) { // or FeedParser(data: data)
+        for (i, zfeed) in feeds.enumerated() {
+            if let parser = FeedParser(URL: zfeed.url) { // or FeedParser(data: data)
                 // Parse asynchronously, not to block the UI.
                 parser.parseAsync(queue: DispatchQueue.global(qos: .userInitiated)) { (result) in
                     var zarticles = [Article]()
@@ -52,21 +50,21 @@ class NewsListViewController: UIViewController, UITableViewDelegate, UITableView
                             let article = Article(entry: entry)
                             zarticles.append(article)
                         }
-                        self.articles[i] = zarticles
+                        zfeed.articles = zarticles
                     case let .rss(feed):        // Really Simple Syndication Feed Model
                         print("rss obtained!")
                         for item in feed.items! {
                             let article = Article(item: item)
                             zarticles.append(article)
                         }
-                        self.articles[i] = zarticles
+                        zfeed.articles = zarticles
                     case let .json(feed):       // JSON Feed Model
                         print("json obtained!")
                         for item in feed.items ?? [] {
                             let article = Article(item: item)
                             zarticles.append(article)
                         }
-                        self.articles[i] = zarticles
+                        zfeed.articles = zarticles
                     case let .failure(error):
                         print(error)
                     }
@@ -92,16 +90,11 @@ class NewsListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return feeds[section]
+        return feeds[section].url.absoluteString
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if articles.count > 0 {
-            print("section: \(section)")
-            return 1
-        } else {
-            return 0
-        }
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -109,10 +102,21 @@ class NewsListViewController: UIViewController, UITableViewDelegate, UITableView
         cell.feedCollectionView.delegate = self
         cell.tag = indexPath.section
         print("cell tag: \(indexPath.section)")
-        cell.articles = articles[indexPath.section]
-        print("articles count: \(articles[indexPath.section].count)")
+        cell.articles = feeds[indexPath.section].articles
+        print("articles count: \(feeds[indexPath.section].articles.count)")
         cell.feedCollectionView.reloadData()
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerLabel = UILabel(frame: CGRect(x: 0, y: 0, width: feedsTableView.frame.width, height: UIFont.systemFont(ofSize: 12, weight: .light).lineHeight))
+        headerLabel.text = feeds[section].url.absoluteString
+        headerLabel.font = UIFont.systemFont(ofSize: 12, weight: .light)
+        return headerLabel
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return UIFont.systemFont(ofSize: 12, weight: .light).lineHeight
     }
     
     
@@ -129,7 +133,7 @@ class NewsListViewController: UIViewController, UITableViewDelegate, UITableView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("collectionview item was selected")
-        selectedArticle = articles[(collectionView.cellForItem(at: indexPath)?.tag)!][indexPath.row]
+        selectedArticle = feeds[(collectionView.cellForItem(at: indexPath)?.tag)!].articles[indexPath.row]
         performSegue(withIdentifier: "goToArticle", sender: self)
     }
     
@@ -137,11 +141,8 @@ class NewsListViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("mmmmmmmm")
         let destinationVC = segue.destination as! ArticleViewController
-        //if let indexPath = articleCollectionView.indexPathsForSelectedItems {
-            destinationVC.article = selectedArticle
-        //}
+        destinationVC.article = selectedArticle
     }
 
 }

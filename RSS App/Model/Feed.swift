@@ -8,7 +8,12 @@
 
 import Foundation
 
-//class Feed {
-//    let name: String?
-//    let articles = [Article]()
-//}
+class Feed {
+    var url: URL
+    var name: String?
+    var articles = [Article]()
+    
+    init(feedURL: URL) {
+        url = feedURL
+    }
+}

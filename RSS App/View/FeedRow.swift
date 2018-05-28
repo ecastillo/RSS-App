@@ -32,12 +32,12 @@ class FeedRow: UITableViewCell, UICollectionViewDataSource {
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let itemsPerRow:CGFloat = 4
-        let hardCodedPadding:CGFloat = 5
-        let itemWidth = (collectionView.bounds.width / itemsPerRow) - hardCodedPadding
-        let itemHeight = collectionView.bounds.height - (2 * hardCodedPadding)
-        return CGSize(width: itemWidth, height: itemHeight)
-    }
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+//        let itemsPerRow:CGFloat = 4
+//        let hardCodedPadding:CGFloat = 5
+//        let itemWidth = (collectionView.bounds.width / itemsPerRow) - hardCodedPadding
+//        let itemHeight = collectionView.bounds.height - (2 * hardCodedPadding)
+//        return CGSize(width: itemWidth, height: itemHeight)
+//    }
 
 }
