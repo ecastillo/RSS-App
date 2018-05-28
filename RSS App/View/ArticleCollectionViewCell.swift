@@ -25,5 +25,5 @@ class ArticleCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
 }

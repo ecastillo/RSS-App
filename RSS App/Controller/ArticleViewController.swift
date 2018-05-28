@@ -30,6 +30,8 @@ class ArticleViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("article url abs: \(article.url?.absoluteURL)")
+        
         articleTitle.text = article.title
         featuredImage.sd_setImage(with: article.featuredImageURL, placeholderImage: nil)
         if let url = article.url {
@@ -75,6 +77,8 @@ class ArticleViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
                 imageView.url = imageAttachment.contentURL
                 print("imageview first frame width: \(imageView.frame.width)")
                 return imageView
+            } else {
+                imageAttachment.originalSize = CGSize.zero
             }
         } else if let iframeAttachment = attachment as? DTIframeTextAttachment {
             print("found an iframe of original size: \(iframeAttachment.originalSize)")
@@ -123,6 +127,13 @@ class ArticleViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
         if !frame.height.isNaN {
             let linkButton = DTLinkButton(frame: frame)
             linkButton.url = url
+            print(url.relativeString)
+            print(url.scheme)
+            if url.scheme != nil {
+                linkButton.url = url
+            } else {
+                linkButton.url = URL(string: url.absoluteString, relativeTo: article.url?.absoluteURL)
+            }
             linkButton.minimumHitSize = CGSize(width: 25, height: 25)
             linkButton.addTarget(self, action: #selector(openLink(_:)), for: .touchUpInside)
             return linkButton
